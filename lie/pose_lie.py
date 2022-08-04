@@ -16,7 +16,7 @@ class LieSkeleton(object):
         for chain in self._kinematic_tree:
             for j in range(1, len(chain)):
                 self._parents[chain[j]] = chain[j-1]
-                # // 앞의 chain(척추, 팔, 다리)를 부모로 삼음
+                # 앞의 chain(척추, 팔, 다리)를 부모로 삼음
 
     def njoints(self):
         return len(self._raw_translation)
@@ -38,6 +38,7 @@ class LieSkeleton(object):
         # print(self._raw_translation.shape)
         _translation = self._raw_translation.clone().detach()
         # detach : 이후 연산의 추적 방지
+	
         _translation = _translation.expand(joints.shape[0], -1, -1).clone()
         #print(_translation.shape)
         #print(self._raw_translation.shape)
@@ -52,6 +53,7 @@ class LieSkeleton(object):
         # bonelength (batch_size, joints_num - 1)
         # offsets (batch_size, joints_num, 3)
         # offset : 요소와 요소 사이의 변위차를 뜻함
+	
         self._translation = self._raw_translation.clone().detach().expand(bonelengths.size(0), -1, -1).clone().to(bonelengths.device)
         self._translation[:, 1:, :] = bonelengths * self._translation[:, 1:, :]
         #  뼈의 길이가 _translation에 영향을 줌
@@ -63,16 +65,19 @@ class LieSkeleton(object):
         # lie_params (batch_size, joints_num, 3)
         lie_params = self.tensor(joints.shape).fill_(0)
         # 각도 초기 지정
+	
         # root_matR (batch_size, 3, 3)
         root_matR = torch.eye(3, dtype=joints.dtype).expand((joints.shape[0], -1, -1)).clone().detach().to(joints.device)
         # 초기 rotation matrix 지정
+	
         for chain in self._kinematic_tree:
             R = root_matR
             for j in range(len(chain) - 1):
                 # (batch, 3)
                 u = self._raw_translation[chain[j + 1]].expand(joints.shape[0], -1).clone().detach().to(joints.device)
                 # device : 해당 tensor가 cpu, gpu중 어디에 있는지 확인할 때 씀
-		        # u 벡터 정의
+		
+		# u 벡터 정의
                 # (batch, 3)
                 v = joints[:, chain[j+1], :] - joints[:, chain[j], :]
                 #  v 벡터 정의
@@ -90,6 +95,7 @@ class LieSkeleton(object):
 
     def forward_kinematics(self, lie_params, joints, root_translation, do_root_R = False, scale_inds=None):
         # 중간 joint들의 각도로 전체적인 형상 결정 - 뼈의 길이 정보 필요 없다
+	
         # lie_params (batch_size, joints_num, 3) lie_params[:, 0, :] is not used
         # joints (batch_size, joints_num, 3)
         # root_translation (batch_size, 3)
@@ -97,6 +103,7 @@ class LieSkeleton(object):
         translation_mat = self.get_translation_joints(joints)
         if scale_inds is not None:
             # scale_inds : 추후 확인
+	
             translation_mat[:, scale_inds, :] *= 1.25
         joints = self.tensor(lie_params.size()).fill_(0)
         joints[:, 0] = root_translation
@@ -114,6 +121,7 @@ class LieSkeleton(object):
             for i in range(1, len(chain)):
                 matR = torch.matmul(matR, lie_exp_map(lie_params[:, chain[i], :]))
                 # rotation matrix가 계속 곱해짐
+		
                 translation_vec = translation_mat[:, chain[i], :].unsqueeze_(-1)
                 joints[:, chain[i], :] = torch.matmul(matR, translation_vec).squeeze_()\
                                          + joints[:, chain[i-1], :]
