@@ -1,2 +1,2 @@
-# NIA-MoCap-1
+# NIA-MoCap-2
 for action2motion
