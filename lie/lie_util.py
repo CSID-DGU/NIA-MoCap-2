@@ -68,7 +68,7 @@ def trace(mat):
 
     # Element-wise multiply by identity and take the sum
     tr = (torch.eye(mat.shape[1], dtype=mat.dtype) * mat).sum(dim=1).sum(dim=1)
-    #  eye : 단위 행렬 생성
+    # eye : 단위 행렬 생성
 
     return tr.view(mat.shape[0])
     # view : 행렬로 결과를 보여줌
@@ -108,6 +108,7 @@ def matR_log_map(R, eps: float = 1e-4, cos_angle: bool = False):
         R - R.permute(0, 2, 1)
     )
     # permute : 모든 차원의 순서 교환 가능
+    
     log_rot = hat_inv(log_rot_hat)
     return log_rot
 
@@ -129,6 +130,7 @@ def lie_u_v(u, v, eps: float = 1e-4):
 
 def lie_exp_map(log_rot, eps: float = 1e-4):
     # 축 각도를 rotation matrix로 변환
+    
     """
     Convert the lie algebra parameters to rotation matrices
     """
@@ -143,6 +145,7 @@ def lie_exp_map(log_rot, eps: float = 1e-4):
     fac1 = rot_angles_inv * rot_angles.sin()
     fac2 = rot_angles_inv * rot_angles_inv * (1.0 - rot_angles.cos())
     # 로드리게스 포뮬라 적용
+    
     skews = hat(log_rot)
     R = (
         fac1[:, None, None] * skews
