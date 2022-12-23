@@ -71,6 +71,53 @@ def list_cut_average(ll, intervals):
     return ll_new
 
 
+def draw_pose_from_cords(img_mat_size, pose_2d, kinematic_tree, radius=2):
+    img = np.zeros(shape=img_mat_size + (3,), dtype=np.uint8)
+    lw = 2
+    pose = pose_2d.astype(np.int32)
+    for i, (idx1, idx2) in enumerate(kinematic_tree):
+        cv2.line(img, (pose[idx1, 0], pose[idx1, 1]), (pose[idx2, 0], pose[idx2, 1]), (255, 255, 255), lw)
+
+    for i, uv in enumerate(pose_2d):
+        point = tuple(uv.astype(np.int32))
+        cv2.circle(img, point, radius, COLORS[i % len(COLORS)], -1)
+    return img
+
+def plot_3d_pose(pose, body_entity, save_path=None):
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+
+    ax.scatter(pose[0::3], pose[1::3], pose[2::3], c='m')
+    Lbegin_body = body_entity.Lbegin_body
+    Lend_body = body_entity.Lend_body
+
+    Lbegin_left = body_entity.Lbegin_left
+    Lend_left = body_entity.Lend_left
+
+    Lbegin_right = body_entity.Lbegin_right
+    Lend_right = body_entity.Lend_right
+    for i in range(len(Lbegin_body)):
+        ax.plot([pose[Lbegin_body[i] * 3], pose[Lend_body[i] * 3]],
+                [pose[Lbegin_body[i] * 3 + 1], pose[Lend_body[i] * 3 + 1]],
+                [pose[Lbegin_body[i] * 3 + 2], pose[Lend_body[i] * 3 + 2]], c='k')
+
+    for i in range(len(Lbegin_left)):
+        ax.plot([pose[Lbegin_left[i] * 3], pose[Lend_left[i] * 3]],
+                [pose[Lbegin_left[i] * 3 + 1], pose[Lend_left[i] * 3 + 1]],
+                [pose[Lbegin_left[i] * 3 + 2], pose[Lend_left[i] * 3 + 2]], c='r')
+
+    for i in range(len(Lbegin_right)):
+        ax.plot([pose[Lbegin_right[i] * 3], pose[Lend_right[i] * 3]],
+                [pose[Lbegin_right[i] * 3 + 1], pose[Lend_right[i] * 3 + 1]],
+                [pose[Lbegin_right[i] * 3 + 2], pose[Lend_right[i] * 3 + 2]], c='b')
+
+    if save_path is not None:
+        plt.savefig(save_path)
+    plt.show()
+    plt.close()
+
+
+
 
 def plot_3d_pose_v2(savePath, kinematic_tree, joints, title=None):
     figure = plt.figure()
@@ -94,23 +141,30 @@ def plot_3d_pose_v2(savePath, kinematic_tree, joints, title=None):
     ax.set_yticklabels([])
     ax.set_zticklabels([])
     plt.savefig(savePath)
+    plt.close()
 
-
-def plot_3d_motion_v2(motion, kinematic_tree, save_path, interval=50, dataset=None):
+'''
+motion: motion data, in dimension of (motion_len, joint_num, 3)
+kinematic_tree: an embeded list indicating the pose structure,
+                such as [[0, 1, 2, 3], [0, 12, 13, 14, 15], [0, 16, 17, 18, 19], [1, 4, 5, 6, 7], [1, 8, 9, 10, 11]]
+save_path: path where the animation will be saved
+interval: time interval (ms) between consecutive frames
+'''
+def plot_3d_motion_v2(motion, kinematic_tree, save_path, interval=50):
     matplotlib.use('Agg')
+    matplotlib.use('Qt5Agg')
 
     def init():
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
-        if dataset == "mocap":
-            ax.set_ylim(-1.5, 1.5)
-            ax.set_xlim(0, 3)
-            ax.set_zlim(-1.5, 1.5)
-        else:
-            ax.set_ylim(-1, 1)
-            ax.set_xlim(-1, 1)
-            ax.set_zlim(-1, 1)
+        # ax.set_xlabel('x')
+        # ax.set_ylabel('y')
+        # ax.set_zlabel('z')
+        ax.set_ylim(-1, 1)
+        ax.set_xlim(-1, 1)
+        ax.set_zlim(-1, 1)
+        # ax.view_init(30,180)
+        # ax.set_ylim(-1.0, 0.2)
+        # ax.set_xlim(-0.2, 1.0)
+        # ax.set_zlim(-1.0, 0.4)
 
     fig = plt.figure()
     # ax = fig.add_subplot(111, projection='3d')
@@ -121,15 +175,12 @@ def plot_3d_motion_v2(motion, kinematic_tree, save_path, interval=50, dataset=No
     colors = ['red', 'magenta', 'black', 'green', 'blue']
     frame_number = data.shape[0]
     # dim (frame, joints, xyz)
-    print(data.shape)
+    # print(data.shape) ###########  modify
 
     def update(index):
         ax.lines = []
         ax.collections = []
-        if dataset == "mocap":
-            ax.view_init(elev=110, azim=-90)
-        else:
-            ax.view_init(elev=110, azim=90)
+        ax.view_init(elev=110, azim=270)
         for chain, color in zip(kinematic_tree, colors):
             ax.plot3D(motion[index, chain, 0], motion[index, chain, 1], motion[index, chain, 2], linewidth=4.0, color=color)
         # plt.axis('off')
@@ -145,14 +196,74 @@ def plot_3d_motion_v2(motion, kinematic_tree, save_path, interval=50, dataset=No
     ani.save(save_path, writer='pillow')
     plt.close()
 
-
-def plot_3d_motion_with_trajec(motion, kinematic_tree, save_path, interval=50, trajec1=None, trajec2=None, dataset=None):
+def plot_3d_multi_motion(motion_list, kinematic_tree, save_path, interval=50, dataset=None):
     matplotlib.use('Agg')
 
     def init():
         ax.set_xlabel('x')
         ax.set_ylabel('y')
         ax.set_zlabel('z')
+        if dataset == "mocap":
+            ax.set_ylim(-1.5, 1.5)
+            ax.set_xlim(0, 3)
+            ax.set_zlim(-1.5, 1.5)
+        else:
+            ax.set_ylim(-1, 1)
+            ax.set_xlim(-1, 1)
+            ax.set_zlim(-1, 1)
+        # ax.set_ylim(-1.0, 0.2)
+        # ax.set_xlim(-0.2, 1.0)
+        # ax.set_zlim(-1.0, 0.4)
+
+    fig = plt.figure()
+    # ax = fig.add_subplot(111, projection='3d')
+    ax = p3.Axes3D(fig)
+    init()
+
+    colors = ['red', 'magenta', 'black', 'magenta', 'black', 'green', 'blue']
+    frame_number = motion_list[0].shape[0]
+    # dim (frame, joints, xyz)
+    # print(data.shape)
+    print("Number of motions %d" % (len(motion_list)))
+    def update(index):
+        ax.lines = []
+        ax.collections = []
+        if dataset == "mocap":
+            ax.view_init(elev=110, azim=-90)
+        else:
+            ax.view_init(elev=110, azim=90)
+        for motion in motion_list:
+            for chain, color in zip(kinematic_tree, colors):
+                ax.plot3D(motion[index, chain, 0], motion[index, chain, 1], motion[index, chain, 2],
+                          linewidth=4.0, color=color)
+        plt.axis('off')
+
+#         ax.set_xticks([])
+#         ax.set_yticks([])
+
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_zticklabels([])
+
+    ani = FuncAnimation(fig, update, frames=frame_number, interval=interval, repeat=False, repeat_delay=200)
+    # update(1)
+    # plt.show()
+    # Writer = writers['ffmpeg']
+    # writer = Writer(fps=15, metadata={})
+    ani.save(save_path, writer='pillow')
+    plt.close()
+
+
+def plot_3d_motion_with_trajec(motion, kinematic_tree, save_path, interval=50, trajec1=None, trajec2=None, dataset=None):
+    matplotlib.use('Agg')
+    # matplotlib.use('Qt5Agg')
+
+
+    def init():
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+        # ax.view_init(30,180)
         if dataset == "mocap":
             ax.set_ylim(-1.5, 1.5)
             ax.set_xlim(0, 3)
@@ -181,6 +292,8 @@ def plot_3d_motion_with_trajec(motion, kinematic_tree, save_path, interval=50, t
         ax.collections = []
         if dataset == "mocap":
             ax.view_init(elev=110, azim=-90)
+        # elif dataset == "new_sample":
+        #     ax.view_init(elev=0, azim=180)
         else:
             ax.view_init(elev=110, azim=90)
         if trajec1 is not None:

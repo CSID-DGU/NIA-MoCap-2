@@ -1,4 +1,6 @@
 import numpy as np
+import sys
+# print(sys.getdefaultencoding())
 ntu_action_labels = [6, 7, 8, 9, 22, 23, 24, 38, 80, 93, 99, 100, 102]
 
 kinect_vibe_extract_joints = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 21, 24, 38]
@@ -31,6 +33,32 @@ humanact12_raw_offsets = np.array([[0,0,0],
                                [0,-1,0],
                                [0,-1,0],
                                [0,-1,0]])
+
+shihao_raw_offsets = np.array([[0,0,0],
+                               [1,0,0],
+                               [-1,0,0],
+                               [0,1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,1,0],
+                               [0,0,1],
+                               [0,0,1],
+                               [0,1,0],
+                               [1,0,0],
+                               [-1,0,0],
+                               [0,0,1],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0],
+                               [0,-1,0]])
+
 
 vibe_raw_offsets = np.array([[0,0,0],
                                [0,-1,0],
@@ -75,6 +103,8 @@ mocap_raw_offsets = np.array([[0, 0, 0],
 # Define a kinematic tree for the skeletal struture
 humanact12_kinematic_chain = [[0, 1, 4, 7, 10], [0, 2, 5, 8, 11], [0, 3, 6, 9, 12, 15], [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]]
 
+# shihao_kinematic_chain = [[0,1,4,7,10], [0,2,5,8,11], [0,3,6,9,12,15], [9,13,16,18,20,22], [9,14,17,19,21,23]]
+
 mocap_kinematic_chain = [[0, 1, 2, 3], [0, 12, 13, 14, 15], [0, 16, 17, 18, 19], [1, 4, 5, 6, 7], [1, 8, 9, 10, 11]]
 
 vibe_kinematic_chain = [[0, 12, 13, 14, 15], [0, 9, 10, 11, 16], [0, 1, 8, 17], [1, 5, 6, 7], [1, 2, 3, 4]]
@@ -91,6 +121,21 @@ mocap_action_enumerator = {
 }
 
 humanact12_coarse_action_enumerator = {
+    1: "warm_up",
+    2: "walk",
+    3: "run",
+    4: "jump",
+    5: "drink",
+    6: "lift_dumbbell",
+    7: "sit",
+    8: "eat",
+    9: "turn steering wheel",
+    10: "phone",
+    11: "boxing",
+    12: "throw",
+}
+
+shihao_coarse_action_enumerator = {
     1: "warm_up",
     2: "walk",
     3: "run",
@@ -153,30 +198,31 @@ humanact12_fine_action_enumerator = {
 #     7: 'drink_bottle_lefthand',
 #     8: 'lift_dumbles_right',
 #     9: 'lift_dumbles_left',
-    # 10: 'lift_dumbles_both',
-    # 11: 'lift_dumbles_updown',
-    # 12: 'warm_up_bodylean',
-    # 13: 'warm_up_bow_right',
-    # 14: 'warm_up_bow_left',
-    # 15: 'jump_vertical',
-    # 16: 'lift_dumbles_wholeupdown',
-    # 17: 'sit',
-    # 18: 'eat_finger_right',
-    # 19: 'eat_pie',
-    # 20: 'drive',
-    # 21: 'phone_right',
-    # 22: 'box_left_right',
-    # 23: 'box_left',
-    # 24: 'box_right',
-    # 25: 'throw_right',
-    # 26: 'drink_cup_righthand',
-    # 27: 'drink_cup_righthand',
-    # 28: 'eat_finger_left',
-    # 29: 'phone_left',
-    # 30: 'throw_both',
-    #                   }
-humanact12_action_enumerator = {
-   0: "default",
+#     10: 'lift_dumbles_both',
+#     11: 'lift_dumbles_updown',
+#     12: 'warm_up_bodylean',
+#     13: 'warm_up_bow_right',
+#     14: 'warm_up_bow_left',
+#     15: 'jump_vertical',
+#     16: 'lift_dumbles_wholeupdown',
+#     17: 'sit',
+#     18: 'eat_finger_right',
+#     19: 'eat_pie',
+#     20: 'drive',
+#     21: 'phone_right',
+#     22: 'box_left_right',
+#     23: 'box_left',
+#     24: 'box_right',
+#     25: 'throw_right',
+#     26: 'drink_cup_righthand',
+#     27: 'drink_cup_righthand',
+#     28: 'eat_finger_left',
+#     29: 'phone_left',
+#     30: 'throw_both',
+#                       }
+
+dtaas_action_enumerator = {
+#    0: "default",
    1: "주위를 둘러보며 리모컨 찾기",
    2: "혼자 스트레칭 하기",
    3: "상대방 발로 밀치기",
@@ -443,4 +489,3 @@ ntu_action_enumerator = {
     119: "support somebody with hand",
     120: "finger-guessing game (playing rock-paper-scissors)",
      }
-

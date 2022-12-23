@@ -6,6 +6,7 @@ from utils.utils_ import *
 from options.evaluate_vae_options import *
 from dataProcessing import dataset
 from torch.utils.data import DataLoader
+from datetime import datetime
 
 if __name__ == "__main__":
     parser = TestOptions()
@@ -33,6 +34,15 @@ if __name__ == "__main__":
         raw_offsets = paramUtil.humanact12_raw_offsets
         kinematic_chain = paramUtil.humanact12_kinematic_chain
         enumerator = paramUtil.humanact12_coarse_action_enumerator
+    
+    elif opt.dataset_type == "dtaas1217":
+        dataset_path = "./dataset/dtaas1217"
+        input_size = 72
+        joints_num = 24
+        label_dec = [i for i in range(1, 143)]
+        raw_offsets = paramUtil.humanact12_raw_offsets
+        kinematic_chain = paramUtil.humanact12_kinematic_chain
+        enumerator = paramUtil.dtaas_action_enumerator
 
     elif opt.dataset_type == "mocap":
         dataset_path = "./dataset/mocap/mocap_3djoints/"
@@ -87,6 +97,8 @@ if __name__ == "__main__":
     if opt.use_lie:
         if opt.dataset_type == 'humanact12':
             data = dataset.MotionFolderDatasetHumanAct12(dataset_path, opt, lie_enforce=opt.lie_enforce)
+        elif opt.dataset_type == 'dtaas1217':
+            data = dataset.MotionFolderDatasetDtaas(dataset_path, opt, lie_enforce=opt.lie_enforce)
         elif opt.dataset_type == 'ntu_rgbd_vibe':
             data = dataset.MotionFolderDatasetNtuVIBE(file_prefix, motion_desc_file, labels, opt, joints_num=joints_num,
                                                       offset=True, extract_joints=paramUtil.kinect_vibe_extract_joints)
@@ -110,8 +122,16 @@ if __name__ == "__main__":
         fake_motion = fake_motion.cpu().numpy()
 
     print(fake_motion.shape)
+    start_time = time.time()
+    print(datetime.now())
     for i in range(fake_motion.shape[0]):
         class_type = enumerator[label_dec[classes[i]]]
+
+        if i != 0:
+            print_evaluate_time(start_time, (i), fake_motion.shape[0]) ###
+            # print(start_time, (i+1), fake_motion.shape[0], class_type)
+        
+        
         motion_orig = fake_motion[i]
         if not os.path.exists(result_path):
             os.makedirs(result_path)
@@ -128,6 +148,9 @@ if __name__ == "__main__":
         np.save(os.path.join(keypoint_path, class_type + str(i) + '_3d.npy'), motion_mat)
 
         if opt.dataset_type == "humanact12":
+            plot_3d_motion_v2(motion_mat, kinematic_chain, save_path=file_name, interval=80)
+
+        elif opt.dataset_type == "dtaas1217":
             plot_3d_motion_v2(motion_mat, kinematic_chain, save_path=file_name, interval=80)
 
         elif opt.dataset_type == "ntu_rgbd_vibe":

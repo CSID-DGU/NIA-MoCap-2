@@ -38,6 +38,25 @@ def print_current_loss(start_time, niter_state, total_niters, losses, epoch=None
         message += ' current_kld_weight: %f' % (current_kld)
     print(message)
 
+def print_evaluate_time(start_time, niter_state, total_niters):
+
+    def as_minutes(s):
+        m = math.floor(s / 60)
+        s -= m * 60
+        return '%dm %ds' % (m, s)
+
+    def time_since(since, percent):
+        now = time.time()
+        s = now - since
+        es = s / percent
+        rs = es - s
+        return '%s (- %s)' % (as_minutes(s), as_minutes(rs))
+
+
+    message = '%s completed: %3d%%' % (time_since(start_time, niter_state / total_niters),
+                                                niter_state / total_niters * 100)
+    print(message)
+
 
 def compose_and_save_img(img_list, save_dir, img_name, col=4, row=1, img_size=(256, 200)):
     # print(col, row)

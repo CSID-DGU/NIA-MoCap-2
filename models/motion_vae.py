@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from models.networks import HierarchicalDenseLayer
 
 
 class GaussianGRU(nn.Module):
@@ -94,3 +95,41 @@ class DecoderGRULie(DecoderGRU):
         lie_out = torch.tanh(lie_out) * self.PI
         output = torch.cat((root_trans, lie_out), dim=-1)
         return output, h_mid
+
+
+# generator with Lie algbra parameter, root joint has rotations,
+# and velocity preserve unit
+class DecoderGRULieV2(DecoderGRU):
+    def __init__(self, input_size, output_size, hidden_size, n_layers, batch_size, device,
+                 use_hdl=False, do_all_parent=False, kinematic_chains=None):
+        super(DecoderGRULieV2, self).__init__(input_size,
+                                            output_size,
+                                            hidden_size,
+                                            n_layers,
+                                            batch_size,
+                                            device)
+        self.use_hdl = use_hdl
+        if self.use_hdl:
+            self.output_lie = HierarchicalDenseLayer(hidden_size, kinematic_chains,
+                                                     num_joints=int(output_size/3), do_all_parent=do_all_parent)
+        else:
+            self.output_lie = nn.Linear(hidden_size, output_size)
+        self.vel_unit = nn.Linear(hidden_size, 20)
+        self.PI = 3.1415926
+
+    def forward(self, inputs):
+        embedded = self.embed(inputs.view(-1, self.input_size))
+        h_in = embedded
+        for i in range(self.n_layers):
+            self.hidden[i] = self.gru[i](h_in, self.hidden[i])
+            h_in = self.hidden[i]
+        hidden_in = h_in
+
+        if self.use_hdl:
+            lie_out = self.output_lie(hidden_in)
+        else:
+            lie_out = self.output_lie(hidden_in)
+            lie_out = torch.tanh(lie_out) * self.PI
+
+        vel_out = self.vel_unit(hidden_in)
+        return lie_out, vel_out, hidden_in

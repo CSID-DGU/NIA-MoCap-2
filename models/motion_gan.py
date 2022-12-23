@@ -4,7 +4,8 @@ from torch import tensor
 import numpy as np
 import torch.nn.functional as F
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:1")
 # device = "cpu"
 
 class Noise(nn.Module):
@@ -275,7 +276,7 @@ class MotionDiscriminator(nn.Module):
         if hidden_unit is None:
             motion_sequence = motion_sequence.permute(1, 0, 2)
             hidden_unit = self.initHidden(motion_sequence.size(1), self.hidden_layer)
-        gru_o, _ = self.recurrent(motion_sequence.float(), hidden_unit)
+        gru_o, _ = self.recurrent(motion_sequence.float(), hidden_unit.cuda())
         # dim (num_samples, 30)
         lin1 = self.linear1(gru_o[-1, :, :])
         lin1 = torch.tanh(lin1)
@@ -284,7 +285,7 @@ class MotionDiscriminator(nn.Module):
         return lin2, _
 
     def initHidden(self, num_samples, layer):
-        return torch.randn(layer, num_samples, self.hidden_size, device=device, requires_grad=False)
+        return torch.randn(layer, num_samples, self.hidden_size, device=None, requires_grad=False)
 
 
 class CategoricalMotionDiscriminator(MotionDiscriminator):
@@ -292,7 +293,7 @@ class CategoricalMotionDiscriminator(MotionDiscriminator):
         super(CategoricalMotionDiscriminator, self).__init__(input_size=input_size,
                                                              hidden_size=hidden_size,
                                                              hidden_layer=hidden_layer,
-                                                             output_size=output_size + dim_categorical,
+                                                             output_size=dim_categorical,
                                                              use_noise=use_noise)
         self.dim_categorical = dim_categorical
 

@@ -1,6 +1,6 @@
 from torch.utils.data import DataLoader
-
 import models.motion_vae as vae_models
+import models.motion_gan as gan_models
 import utils.paramUtil as paramUtil
 from trainer.vae_trainer import *
 from dataProcessing import dataset
@@ -37,6 +37,15 @@ if __name__ == "__main__":
         kinematic_chain = paramUtil.humanact12_kinematic_chain
         data = dataset.MotionFolderDatasetHumanAct12(dataset_path, opt, lie_enforce=opt.lie_enforce)
 
+    elif opt.dataset_type == "dtaas1217":
+        dataset_path = "./dataset/dtaas1217"
+        input_size = 72
+        joints_num = 24
+        raw_offsets = paramUtil.humanact12_raw_offsets
+        kinematic_chain = paramUtil.humanact12_kinematic_chain
+        data = dataset.MotionFolderDatasetDtaas(dataset_path, opt, lie_enforce=opt.lie_enforce)
+
+
     elif opt.dataset_type == "mocap":
         dataset_path = "./dataset/mocap/mocap_3djoints/"
         clip_path = './dataset/mocap/pose_clip.csv'
@@ -66,7 +75,7 @@ if __name__ == "__main__":
         motion_loader = DataLoader(data, batch_size=opt.batch_size, drop_last=True, num_workers=1, shuffle=True)
     else:
         motion_dataset = dataset.MotionDataset(data, opt)
-        motion_loader = DataLoader(motion_dataset, batch_size=opt.batch_size, drop_last=True, num_workers=2, shuffle=True)
+        motion_loader = DataLoader(motion_dataset, batch_size=opt.batch_size, drop_last=True, num_workers=1, shuffle=True)
     opt.pose_dim = input_size
 
     if opt.time_counter:
@@ -97,6 +106,29 @@ if __name__ == "__main__":
     pc_decoder = sum(param.numel() for param in decoder.parameters())
     print(decoder)
     print("Total parameters of decoder: {}".format(pc_decoder))
+    # print(kinematic_chain)
+    print("2022.12.11 18:05")
+
+##### modify
+    motion_discriminator = None
+    motion_classifier = None
+    if opt.do_adversary:
+        if opt.do_recognition:
+            motion_discriminator = gan_models.CategoricalMotionDiscriminator(input_size, opt.hidden_size,
+                                                                             opt.d_hidden_layers, opt.dim_category)
+        else:
+            # Binary discriminator
+            motion_discriminator = gan_models.MotionDiscriminator(input_size, opt.hidden_size,
+                                                                  opt.d_hidden_layers, 1)
+        print(motion_discriminator)
+        print("Total parameters of motion discriminator: {}".format(sum(param.numel() for param in motion_discriminator.parameters())))
+    elif opt.do_recognition:
+        # Multi discriminator
+        motion_classifier = gan_models.MotionDiscriminator(input_size, opt.hidden_size,
+                                                   opt.d_hidden_layers, opt.dim_category)
+        print(motion_classifier)
+        print("Total parameters of motion discriminator: {}".format(
+            sum(param.numel() for param in motion_classifier.parameters())))
 
     if opt.use_lie:
         # Use Lie representation
@@ -105,7 +137,8 @@ if __name__ == "__main__":
         # Use 3d coordinates representation
         trainer = Trainer(motion_loader, opt, device)
 
-    logs = trainer.trainIters(prior_net, posterior_net, decoder)
+    # logs = trainer.trainIters(prior_net, posterior_net, decoder)
+    logs = trainer.trainIters(prior_net, posterior_net, decoder, motion_discriminator, motion_classifier)
 
     plot_loss(logs, os.path.join(opt.save_root, "loss_curve.png"), opt.plot_every)
     save_logfile(logs, opt.log_path)
