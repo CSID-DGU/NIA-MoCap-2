@@ -141,7 +141,7 @@ def calculate_diversity_multimodality(activations, labels, num_labels):
 
 def evaluation(log_file):
     with open(log_file, 'w') as f:
-        for replication in range(2):
+        for replication in range(20):
             motion_loaders = {}
             motion_loaders['ground truth'] = ground_truth_motion_loader
             for motion_loader_name, motion_loader_getter in eval_motion_loaders.items():
