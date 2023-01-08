@@ -9,7 +9,7 @@ classifier_model_files = {
     'humanact12': './model_file/action_recognition_model_humanact12.tar',
     'humanact12_fineG': './model_file/action_recognition_model_humanact12_fineG.tar',
     'mocap': './model_file/action_recognition_model_mocap_new.tar',
-    'dtaas1217': './model_file/latest.tar'
+    'dtaas_final': './model_file/latest.tar'
 }
 
 

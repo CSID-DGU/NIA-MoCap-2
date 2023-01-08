@@ -18,8 +18,11 @@ def evaluate_accuracy(num_motions, gru_classifier, motion_loaders, dataset_opt, 
     for motion_loader_name, motion_loader in motion_loaders.items():
         accuracy = calculate_accuracy(motion_loader, len(dataset_opt.label_dec),
                                       gru_classifier, device)
+        # print(accuracy.shape)
+        # print(accuracy.sum(axis=1))
         print(f'---> [{motion_loader_name}] Accuracy: {np.trace(accuracy)/num_motions:.4f}')
         print(f'---> [{motion_loader_name}] Accuracy: {np.trace(accuracy)/num_motions:.4f}', file=file, flush=True)
+
 
 
 def calculate_accuracy(motion_loader, num_labels, classifier, device):
@@ -36,6 +39,7 @@ def calculate_accuracy(motion_loader, num_labels, classifier, device):
             for label, pred in zip(batch_label, batch_pred):
                 # print(label.data, pred.data) ### jusuk
                 confusion[label][pred] += 1
+    # print(confusion)
 
     return confusion
 
@@ -137,7 +141,7 @@ def calculate_diversity_multimodality(activations, labels, num_labels):
 
 def evaluation(log_file):
     with open(log_file, 'w') as f:
-        for replication in range(20):
+        for replication in range(2):
             motion_loaders = {}
             motion_loaders['ground truth'] = ground_truth_motion_loader
             for motion_loader_name, motion_loader_getter in eval_motion_loaders.items():
@@ -207,7 +211,7 @@ if __name__ == '__main__':
 
     # dataset_opt_path = './checkpoints/vae/humanact12/vanilla_vae_lie_mse_kld001/opt.txt'
 #     dataset_opt_path = './checkpoints/vae/mocap/vanila_vae_tf_2/opt.txt'
-    dataset_opt_path = './checkpoints/vae/dtaas1217/vanilla_vae_lie_mse_kld_1217/opt.txt'
+    dataset_opt_path = './checkpoints/vae/dtaas_final/vanilla_vae_lie_mse_kld_final/opt.txt'
 
     label_spe = 3
     eval_motion_loaders = {
@@ -239,7 +243,7 @@ if __name__ == '__main__':
 
 
         'vanilla_vae_lie_mse_kld001': lambda num_motions, device: get_motion_loader(
-          './checkpoints/vae/dtaas1217/vanilla_vae_lie_mse_kld_1217/opt.txt',
+          './checkpoints/vae/dtaas_final/vanilla_vae_lie_mse_kld_final/opt.txt',
           num_motions, 128, device, ground_truth_motion_loader),
         # 'vanilla_vae_lie_mse_kld001_fineG': lambda num_motions, device: get_motion_loader(
         #   './checkpoints/vae/humanact12/vanilla_vae_lie_mse_kld001/opt.txt',
@@ -276,7 +280,6 @@ if __name__ == '__main__':
     }
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-#    device = torch.device("cpu")
     torch.cuda.set_device(0)
     num_motions = 3000
     #num_motions = 200
@@ -297,6 +300,5 @@ if __name__ == '__main__':
     animation_4_user_study(save_dir, motion_loaders)
     
     '''
-    log_file = 'final_evaluation_dtaas1217_3_veloc_label3_bk.log'
+    log_file = 'final_evaluation_dtaas_final_1_veloc_label3_bk.log'
     evaluation(log_file)
-

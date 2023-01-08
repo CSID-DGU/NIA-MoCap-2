@@ -35,8 +35,8 @@ if __name__ == "__main__":
         kinematic_chain = paramUtil.humanact12_kinematic_chain
         enumerator = paramUtil.humanact12_coarse_action_enumerator
     
-    elif opt.dataset_type == "dtaas1217":
-        dataset_path = "./dataset/dtaas1217"
+    elif opt.dataset_type == "dtaas_final":
+        dataset_path = "./dataset/dtaas_final"
         input_size = 72
         joints_num = 24
         label_dec = [i for i in range(1, 143)]
@@ -97,7 +97,7 @@ if __name__ == "__main__":
     if opt.use_lie:
         if opt.dataset_type == 'humanact12':
             data = dataset.MotionFolderDatasetHumanAct12(dataset_path, opt, lie_enforce=opt.lie_enforce)
-        elif opt.dataset_type == 'dtaas1217':
+        elif opt.dataset_type == 'dtaas_final':
             data = dataset.MotionFolderDatasetDtaas(dataset_path, opt, lie_enforce=opt.lie_enforce)
         elif opt.dataset_type == 'ntu_rgbd_vibe':
             data = dataset.MotionFolderDatasetNtuVIBE(file_prefix, motion_desc_file, labels, opt, joints_num=joints_num,
@@ -150,7 +150,7 @@ if __name__ == "__main__":
         if opt.dataset_type == "humanact12":
             plot_3d_motion_v2(motion_mat, kinematic_chain, save_path=file_name, interval=80)
 
-        elif opt.dataset_type == "dtaas1217":
+        elif opt.dataset_type == "dtaas_final":
             plot_3d_motion_v2(motion_mat, kinematic_chain, save_path=file_name, interval=80)
 
         elif opt.dataset_type == "ntu_rgbd_vibe":
@@ -158,3 +158,5 @@ if __name__ == "__main__":
 
         elif opt.dataset_type == "mocap":
             plot_3d_motion_v2(motion_mat, kinematic_chain, save_path=file_name, interval=80, dataset="mocap")
+
+    print(datetime.now())

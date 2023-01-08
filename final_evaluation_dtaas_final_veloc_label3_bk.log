@@ -1,0 +1,222 @@
+==================== Replication 0 ====================
+Time: 2023-01-04 03:23:27.238830
+---> [ground truth] Accuracy: 0.6407
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1843
+Time: 2023-01-04 03:23:33.889295
+---> [ground truth] FID: 0.0589
+---> [ground truth] Diversity: 7.3518
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.5160
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.6724
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 1 ====================
+Time: 2023-01-04 03:24:05.087995
+---> [ground truth] Accuracy: 0.6390
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1967
+Time: 2023-01-04 03:24:11.771508
+---> [ground truth] FID: 0.0553
+---> [ground truth] Diversity: 7.1716
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.3778
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.3273
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 2 ====================
+Time: 2023-01-04 03:24:42.586066
+---> [ground truth] Accuracy: 0.6313
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1927
+Time: 2023-01-04 03:24:49.226996
+---> [ground truth] FID: 0.0755
+---> [ground truth] Diversity: 7.2052
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.2819
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.7416
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 3 ====================
+Time: 2023-01-04 03:25:19.686188
+---> [ground truth] Accuracy: 0.6407
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1960
+Time: 2023-01-04 03:25:26.373200
+---> [ground truth] FID: 0.0468
+---> [ground truth] Diversity: 6.9175
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.2356
+---> [vanilla_vae_lie_mse_kld001] Diversity: 7.2674
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 4 ====================
+Time: 2023-01-04 03:25:57.119245
+---> [ground truth] Accuracy: 0.6353
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1803
+Time: 2023-01-04 03:26:04.210027
+---> [ground truth] FID: 0.0802
+---> [ground truth] Diversity: 6.8560
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.2447
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.7744
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 5 ====================
+Time: 2023-01-04 03:26:35.730158
+---> [ground truth] Accuracy: 0.6477
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1937
+Time: 2023-01-04 03:26:42.686516
+---> [ground truth] FID: 0.0801
+---> [ground truth] Diversity: 7.0642
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4166
+---> [vanilla_vae_lie_mse_kld001] Diversity: 7.0287
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 6 ====================
+Time: 2023-01-04 03:27:14.458255
+---> [ground truth] Accuracy: 0.6283
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1837
+Time: 2023-01-04 03:27:21.221194
+---> [ground truth] FID: 0.0553
+---> [ground truth] Diversity: 7.0304
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4599
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.8576
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 7 ====================
+Time: 2023-01-04 03:27:52.621178
+---> [ground truth] Accuracy: 0.6273
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1903
+Time: 2023-01-04 03:27:59.422064
+---> [ground truth] FID: 0.0472
+---> [ground truth] Diversity: 6.9082
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.3799
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.3552
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 8 ====================
+Time: 2023-01-04 03:28:30.817498
+---> [ground truth] Accuracy: 0.6363
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1763
+Time: 2023-01-04 03:28:37.686589
+---> [ground truth] FID: 0.0999
+---> [ground truth] Diversity: 6.9112
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4163
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.9553
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 9 ====================
+Time: 2023-01-04 03:29:09.349498
+---> [ground truth] Accuracy: 0.6367
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1857
+Time: 2023-01-04 03:29:16.213320
+---> [ground truth] FID: 0.0609
+---> [ground truth] Diversity: 6.3050
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.1830
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.9842
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 10 ====================
+Time: 2023-01-04 03:29:47.926360
+---> [ground truth] Accuracy: 0.6273
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1827
+Time: 2023-01-04 03:29:54.737636
+---> [ground truth] FID: 0.0560
+---> [ground truth] Diversity: 6.8859
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4718
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.4414
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 11 ====================
+Time: 2023-01-04 03:30:26.263626
+---> [ground truth] Accuracy: 0.6303
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1713
+Time: 2023-01-04 03:30:33.062877
+---> [ground truth] FID: 0.0589
+---> [ground truth] Diversity: 7.0219
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.3209
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.2590
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 12 ====================
+Time: 2023-01-04 03:31:04.923822
+---> [ground truth] Accuracy: 0.6510
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1977
+Time: 2023-01-04 03:31:11.773194
+---> [ground truth] FID: 0.0672
+---> [ground truth] Diversity: 7.2567
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.2510
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.4411
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 13 ====================
+Time: 2023-01-04 03:31:42.907571
+---> [ground truth] Accuracy: 0.6363
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1950
+Time: 2023-01-04 03:31:49.818034
+---> [ground truth] FID: 0.0488
+---> [ground truth] Diversity: 6.6364
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.3960
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.8725
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 14 ====================
+Time: 2023-01-04 03:32:21.706683
+---> [ground truth] Accuracy: 0.6357
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1897
+Time: 2023-01-04 03:32:28.488682
+---> [ground truth] FID: 0.0667
+---> [ground truth] Diversity: 6.9337
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4825
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.4753
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 15 ====================
+Time: 2023-01-04 03:33:00.688378
+---> [ground truth] Accuracy: 0.6227
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1880
+Time: 2023-01-04 03:33:07.548005
+---> [ground truth] FID: 0.0645
+---> [ground truth] Diversity: 7.3346
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4951
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.5463
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 16 ====================
+Time: 2023-01-04 03:33:39.559553
+---> [ground truth] Accuracy: 0.6367
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1900
+Time: 2023-01-04 03:33:46.437001
+---> [ground truth] FID: 0.0549
+---> [ground truth] Diversity: 6.7702
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.5467
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.3185
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 17 ====================
+Time: 2023-01-04 03:34:18.308922
+---> [ground truth] Accuracy: 0.6180
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1793
+Time: 2023-01-04 03:34:25.278972
+---> [ground truth] FID: 0.0610
+---> [ground truth] Diversity: 6.2384
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4697
+---> [vanilla_vae_lie_mse_kld001] Diversity: 7.1026
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 18 ====================
+Time: 2023-01-04 03:34:57.063830
+---> [ground truth] Accuracy: 0.6370
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1907
+Time: 2023-01-04 03:35:04.086742
+---> [ground truth] FID: 0.0525
+---> [ground truth] Diversity: 6.7388
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.3994
+---> [vanilla_vae_lie_mse_kld001] Diversity: 6.9875
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+==================== Replication 19 ====================
+Time: 2023-01-04 03:35:35.777298
+---> [ground truth] Accuracy: 0.6403
+---> [vanilla_vae_lie_mse_kld001] Accuracy: 0.1900
+Time: 2023-01-04 03:35:42.748326
+---> [ground truth] FID: 0.0645
+---> [ground truth] Diversity: 6.5940
+---> [ground truth] Multimodality: 0.0000
+---> [vanilla_vae_lie_mse_kld001] FID: 1.4141
+---> [vanilla_vae_lie_mse_kld001] Diversity: 7.2592
+---> [vanilla_vae_lie_mse_kld001] Multimodality: 0.0000
+Time: 2023-01-04 03:35:55.087004
+!!! DONE !!!

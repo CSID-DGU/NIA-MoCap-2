@@ -26,8 +26,8 @@ def get_dataset_motion_dataset(opt, label=None):
         data = dataset.MotionFolderDatasetHumanAct12(dataset_path, opt, lie_enforce=opt.lie_enforce)
         motion_dataset = dataset.MotionDataset(data, HumanAct12Options)
     
-    elif opt.dataset_type == "dtaas1217":
-        dataset_path = "./dataset/dtaas1217"
+    elif opt.dataset_type == "dtaas_final":
+        dataset_path = "./dataset/dtaas_final"
         HumanAct12Options = Options(False, False, False, 60, True)
         data = dataset.MotionFolderDatasetDtaas(dataset_path, opt, lie_enforce=opt.lie_enforce)
         motion_dataset = dataset.MotionDataset(data, HumanAct12Options)

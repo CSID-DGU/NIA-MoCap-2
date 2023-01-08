@@ -117,6 +117,7 @@ def lie_exp_map(log_rot, eps: float = 1e-4):
         + torch.eye(3, dtype=log_rot.dtype, device=log_rot.device)[None]
     )
     # print(R.shape)
+    R = R.to('cuda') ############### modify
     return R
 
 

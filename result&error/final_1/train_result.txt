@@ -1,0 +1,840 @@
+irteam@9f8b370d388a:~/Desktop/bomi/final/a2m_mocap$ python train_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type dtaas_final --batch_size 2048 --do_recognition --motion_length 60 --coarse_grained --lambda_kld 0.001 --eval_every 1000 --plot_every 50 --print_every 20 --save_every 1000 --save_latest 50 --time_counter --use_lie --gpu_id 0 --iters 15000 > train_result.txt 2> train_error.txt
+------------ Options -------------
+arbitrary_len: False
+batch_size: 2048
+checkpoints_dir: ./checkpoints/vae
+clip_set: ./dataset/pose_clip_full.csv
+coarse_grained: True
+d_hidden_layers: 2
+dataset_type: dtaas_final
+decoder_hidden_layers: 2
+dim_z: 30
+do_adversary: False
+do_align: False
+do_all_parent: False
+do_kld_schedule: False
+do_recognition: True
+do_relative: False
+do_trajec_align: False
+end_lambda_kld: 0.01
+epoch_size: None
+eval_every: 1000
+gpu_id: 0
+hidden_size: 128
+isTrain: True
+is_continue: False
+iters: 15000
+kld_schedule_range: 0-0
+lambda_adversary: 0.5
+lambda_align: 0.5
+lambda_kld: 0.001
+lambda_recognition: 0.5
+lambda_trajec: 0.8
+lie_enforce: False
+motion_length: 60
+name: vanilla_vae_lie_mse_kld_final
+no_trajectory: False
+optim_seperate: False
+plot_every: 50
+posterior_hidden_layers: 1
+print_every: 20
+prior_hidden_layers: 1
+save_every: 1000
+save_latest: 50
+skip_prob: 0
+tf_ratio: 0.6
+time_counter: True
+use_geo_loss: False
+use_hdl: False
+use_lie: True
+use_vel_H: False
+use_vel_S: False
+veloc_hidden_layers: 1
+-------------- End ----------------
+Total number of frames 983956, videos 14116, action types 142
+GaussianGRU(
+  (embed): Linear(in_features=215, out_features=128, bias=True)
+  (gru): ModuleList(
+    (0): GRUCell(128, 128)
+  )
+  (mu_net): Linear(in_features=128, out_features=30, bias=True)
+  (logvar_net): Linear(in_features=128, out_features=30, bias=True)
+)
+Total parameters of prior net: 134460
+GaussianGRU(
+  (embed): Linear(in_features=215, out_features=128, bias=True)
+  (gru): ModuleList(
+    (0): GRUCell(128, 128)
+  )
+  (mu_net): Linear(in_features=128, out_features=30, bias=True)
+  (logvar_net): Linear(in_features=128, out_features=30, bias=True)
+)
+Total parameters of posterior net: 134460
+DecoderGRULie(
+  (embed): Linear(in_features=245, out_features=128, bias=True)
+  (gru): ModuleList(
+    (0): GRUCell(128, 128)
+    (1): GRUCell(128, 128)
+  )
+  (output): Linear(in_features=128, out_features=72, bias=True)
+  (output_lie): Linear(in_features=69, out_features=69, bias=True)
+)
+Total parameters of decoder: 243750
+MotionDiscriminator(
+  (recurrent): GRU(72, 128, num_layers=2)
+  (linear1): Linear(in_features=128, out_features=30, bias=True)
+  (linear2): Linear(in_features=30, out_features=142, bias=True)
+)
+Total parameters of motion discriminator: 184912
+Time: 2023-01-03 13:21:49.233251
+0m 56s (- 703m 37s) niter: 20 completed:   0%) g_loss: 0.129  g_recon_loss: 0.046  g_kld_loss: 0.126  g_recog_loss: 0.083  d_loss: 0.002  d_recog_loss: 0.002 
+1m 52s (- 698m 36s) niter: 40 completed:   0%) g_loss: 0.112  g_recon_loss: 0.029  g_kld_loss: 0.076  g_recog_loss: 0.083  d_loss: 0.002  d_recog_loss: 0.002 
+2m 47s (- 696m 21s) niter: 60 completed:   0%) g_loss: 0.106  g_recon_loss: 0.023  g_kld_loss: 0.262  g_recog_loss: 0.083  d_loss: 0.002  d_recog_loss: 0.002 
+3m 43s (- 693m 22s) niter: 80 completed:   0%) g_loss: 0.100  g_recon_loss: 0.018  g_kld_loss: 0.457  g_recog_loss: 0.081  d_loss: 0.002  d_recog_loss: 0.002 
+4m 38s (- 691m 35s) niter: 100 completed:   0%) g_loss: 0.093  g_recon_loss: 0.015  g_kld_loss: 0.562  g_recog_loss: 0.078  d_loss: 0.002  d_recog_loss: 0.002 
+5m 33s (- 690m 10s) niter: 120 completed:   0%) g_loss: 0.089  g_recon_loss: 0.013  g_kld_loss: 0.513  g_recog_loss: 0.076  d_loss: 0.002  d_recog_loss: 0.002 
+6m 28s (- 687m 54s) niter: 140 completed:   0%) g_loss: 0.087  g_recon_loss: 0.012  g_kld_loss: 0.487  g_recog_loss: 0.075  d_loss: 0.002  d_recog_loss: 0.002 
+7m 24s (- 686m 29s) niter: 160 completed:   1%) g_loss: 0.084  g_recon_loss: 0.010  g_kld_loss: 0.395  g_recog_loss: 0.073  d_loss: 0.002  d_recog_loss: 0.002 
+8m 19s (- 684m 59s) niter: 180 completed:   1%) g_loss: 0.082  g_recon_loss: 0.010  g_kld_loss: 0.321  g_recog_loss: 0.072  d_loss: 0.002  d_recog_loss: 0.002 
+9m 14s (- 683m 52s) niter: 200 completed:   1%) g_loss: 0.080  g_recon_loss: 0.009  g_kld_loss: 0.361  g_recog_loss: 0.071  d_loss: 0.002  d_recog_loss: 0.002 
+10m 10s (- 683m 2s) niter: 220 completed:   1%) g_loss: 0.079  g_recon_loss: 0.009  g_kld_loss: 0.324  g_recog_loss: 0.070  d_loss: 0.002  d_recog_loss: 0.002 
+11m 5s (- 681m 38s) niter: 240 completed:   1%) g_loss: 0.078  g_recon_loss: 0.008  g_kld_loss: 0.380  g_recog_loss: 0.069  d_loss: 0.002  d_recog_loss: 0.002 
+12m 1s (- 681m 20s) niter: 260 completed:   1%) g_loss: 0.076  g_recon_loss: 0.008  g_kld_loss: 0.334  g_recog_loss: 0.068  d_loss: 0.002  d_recog_loss: 0.002 
+12m 58s (- 682m 30s) niter: 280 completed:   1%) g_loss: 0.075  g_recon_loss: 0.008  g_kld_loss: 0.331  g_recog_loss: 0.067  d_loss: 0.002  d_recog_loss: 0.002 
+13m 56s (- 683m 26s) niter: 300 completed:   2%) g_loss: 0.074  g_recon_loss: 0.008  g_kld_loss: 0.366  g_recog_loss: 0.066  d_loss: 0.002  d_recog_loss: 0.002 
+14m 54s (- 683m 52s) niter: 320 completed:   2%) g_loss: 0.074  g_recon_loss: 0.007  g_kld_loss: 0.347  g_recog_loss: 0.066  d_loss: 0.002  d_recog_loss: 0.002 
+15m 52s (- 684m 16s) niter: 340 completed:   2%) g_loss: 0.073  g_recon_loss: 0.007  g_kld_loss: 0.372  g_recog_loss: 0.066  d_loss: 0.002  d_recog_loss: 0.002 
+16m 49s (- 684m 18s) niter: 360 completed:   2%) g_loss: 0.072  g_recon_loss: 0.007  g_kld_loss: 0.362  g_recog_loss: 0.065  d_loss: 0.002  d_recog_loss: 0.002 
+17m 46s (- 684m 5s) niter: 380 completed:   2%) g_loss: 0.071  g_recon_loss: 0.007  g_kld_loss: 0.289  g_recog_loss: 0.064  d_loss: 0.002  d_recog_loss: 0.002 
+18m 45s (- 684m 32s) niter: 400 completed:   2%) g_loss: 0.071  g_recon_loss: 0.007  g_kld_loss: 0.330  g_recog_loss: 0.064  d_loss: 0.002  d_recog_loss: 0.002 
+19m 43s (- 684m 46s) niter: 420 completed:   2%) g_loss: 0.070  g_recon_loss: 0.006  g_kld_loss: 0.285  g_recog_loss: 0.063  d_loss: 0.002  d_recog_loss: 0.002 
+20m 41s (- 684m 53s) niter: 440 completed:   2%) g_loss: 0.069  g_recon_loss: 0.006  g_kld_loss: 0.303  g_recog_loss: 0.063  d_loss: 0.002  d_recog_loss: 0.002 
+21m 40s (- 685m 0s) niter: 460 completed:   3%) g_loss: 0.069  g_recon_loss: 0.006  g_kld_loss: 0.360  g_recog_loss: 0.062  d_loss: 0.002  d_recog_loss: 0.002 
+22m 36s (- 683m 49s) niter: 480 completed:   3%) g_loss: 0.068  g_recon_loss: 0.006  g_kld_loss: 0.316  g_recog_loss: 0.062  d_loss: 0.002  d_recog_loss: 0.002 
+23m 31s (- 682m 14s) niter: 500 completed:   3%) g_loss: 0.070  g_recon_loss: 0.006  g_kld_loss: 0.371  g_recog_loss: 0.063  d_loss: 0.002  d_recog_loss: 0.002 
+24m 26s (- 680m 36s) niter: 520 completed:   3%) g_loss: 0.069  g_recon_loss: 0.006  g_kld_loss: 0.415  g_recog_loss: 0.062  d_loss: 0.002  d_recog_loss: 0.002 
+25m 21s (- 679m 3s) niter: 540 completed:   3%) g_loss: 0.068  g_recon_loss: 0.006  g_kld_loss: 0.337  g_recog_loss: 0.061  d_loss: 0.002  d_recog_loss: 0.002 
+26m 16s (- 677m 43s) niter: 560 completed:   3%) g_loss: 0.067  g_recon_loss: 0.006  g_kld_loss: 0.341  g_recog_loss: 0.061  d_loss: 0.002  d_recog_loss: 0.002 
+27m 12s (- 676m 22s) niter: 580 completed:   3%) g_loss: 0.066  g_recon_loss: 0.006  g_kld_loss: 0.338  g_recog_loss: 0.060  d_loss: 0.002  d_recog_loss: 0.002 
+28m 7s (- 674m 52s) niter: 600 completed:   4%) g_loss: 0.066  g_recon_loss: 0.006  g_kld_loss: 0.296  g_recog_loss: 0.060  d_loss: 0.002  d_recog_loss: 0.002 
+29m 1s (- 673m 8s) niter: 620 completed:   4%) g_loss: 0.066  g_recon_loss: 0.006  g_kld_loss: 0.357  g_recog_loss: 0.060  d_loss: 0.002  d_recog_loss: 0.002 
+29m 55s (- 671m 34s) niter: 640 completed:   4%) g_loss: 0.068  g_recon_loss: 0.006  g_kld_loss: 0.404  g_recog_loss: 0.062  d_loss: 0.002  d_recog_loss: 0.002 
+30m 49s (- 669m 53s) niter: 660 completed:   4%) g_loss: 0.067  g_recon_loss: 0.006  g_kld_loss: 0.360  g_recog_loss: 0.061  d_loss: 0.002  d_recog_loss: 0.002 
+31m 44s (- 668m 22s) niter: 680 completed:   4%) g_loss: 0.065  g_recon_loss: 0.006  g_kld_loss: 0.307  g_recog_loss: 0.059  d_loss: 0.002  d_recog_loss: 0.002 
+32m 38s (- 666m 56s) niter: 700 completed:   4%) g_loss: 0.065  g_recon_loss: 0.005  g_kld_loss: 0.331  g_recog_loss: 0.059  d_loss: 0.002  d_recog_loss: 0.002 
+33m 33s (- 665m 31s) niter: 720 completed:   4%) g_loss: 0.064  g_recon_loss: 0.006  g_kld_loss: 0.369  g_recog_loss: 0.058  d_loss: 0.002  d_recog_loss: 0.002 
+34m 27s (- 664m 3s) niter: 740 completed:   4%) g_loss: 0.064  g_recon_loss: 0.005  g_kld_loss: 0.307  g_recog_loss: 0.058  d_loss: 0.002  d_recog_loss: 0.002 
+35m 22s (- 662m 50s) niter: 760 completed:   5%) g_loss: 0.064  g_recon_loss: 0.005  g_kld_loss: 0.323  g_recog_loss: 0.058  d_loss: 0.002  d_recog_loss: 0.002 
+36m 17s (- 661m 32s) niter: 780 completed:   5%) g_loss: 0.064  g_recon_loss: 0.005  g_kld_loss: 0.346  g_recog_loss: 0.058  d_loss: 0.002  d_recog_loss: 0.002 
+37m 11s (- 660m 8s) niter: 800 completed:   5%) g_loss: 0.063  g_recon_loss: 0.005  g_kld_loss: 0.390  g_recog_loss: 0.058  d_loss: 0.002  d_recog_loss: 0.002 
+38m 6s (- 659m 6s) niter: 820 completed:   5%) g_loss: 0.063  g_recon_loss: 0.005  g_kld_loss: 0.330  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+39m 1s (- 657m 52s) niter: 840 completed:   5%) g_loss: 0.062  g_recon_loss: 0.005  g_kld_loss: 0.330  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+39m 56s (- 656m 36s) niter: 860 completed:   5%) g_loss: 0.062  g_recon_loss: 0.005  g_kld_loss: 0.360  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+40m 50s (- 655m 17s) niter: 880 completed:   5%) g_loss: 0.062  g_recon_loss: 0.005  g_kld_loss: 0.307  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+41m 44s (- 653m 53s) niter: 900 completed:   6%) g_loss: 0.062  g_recon_loss: 0.005  g_kld_loss: 0.396  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+42m 39s (- 652m 45s) niter: 920 completed:   6%) g_loss: 0.061  g_recon_loss: 0.005  g_kld_loss: 0.362  g_recog_loss: 0.056  d_loss: 0.002  d_recog_loss: 0.002 
+43m 33s (- 651m 37s) niter: 940 completed:   6%) g_loss: 0.061  g_recon_loss: 0.005  g_kld_loss: 0.323  g_recog_loss: 0.056  d_loss: 0.002  d_recog_loss: 0.002 
+44m 28s (- 650m 30s) niter: 960 completed:   6%) g_loss: 0.062  g_recon_loss: 0.005  g_kld_loss: 0.379  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+45m 23s (- 649m 25s) niter: 980 completed:   6%) g_loss: 0.063  g_recon_loss: 0.005  g_kld_loss: 0.439  g_recog_loss: 0.057  d_loss: 0.002  d_recog_loss: 0.002 
+46m 19s (- 648m 34s) niter: 1000 completed:   6%) g_loss: 0.061  g_recon_loss: 0.005  g_kld_loss: 0.334  g_recog_loss: 0.056  d_loss: 0.002  d_recog_loss: 0.002 
+47m 14s (- 647m 27s) niter: 1020 completed:   6%) g_loss: 0.060  g_recon_loss: 0.005  g_kld_loss: 0.346  g_recog_loss: 0.055  d_loss: 0.002  d_recog_loss: 0.002 
+48m 8s (- 646m 15s) niter: 1040 completed:   6%) g_loss: 0.060  g_recon_loss: 0.005  g_kld_loss: 0.351  g_recog_loss: 0.055  d_loss: 0.002  d_recog_loss: 0.002 
+49m 3s (- 645m 13s) niter: 1060 completed:   7%) g_loss: 0.060  g_recon_loss: 0.005  g_kld_loss: 0.374  g_recog_loss: 0.055  d_loss: 0.002  d_recog_loss: 0.002 
+49m 59s (- 644m 21s) niter: 1080 completed:   7%) g_loss: 0.059  g_recon_loss: 0.005  g_kld_loss: 0.337  g_recog_loss: 0.054  d_loss: 0.002  d_recog_loss: 0.002 
+50m 55s (- 643m 27s) niter: 1100 completed:   7%) g_loss: 0.058  g_recon_loss: 0.005  g_kld_loss: 0.338  g_recog_loss: 0.054  d_loss: 0.002  d_recog_loss: 0.002 
+51m 50s (- 642m 25s) niter: 1120 completed:   7%) g_loss: 0.058  g_recon_loss: 0.005  g_kld_loss: 0.370  g_recog_loss: 0.053  d_loss: 0.002  d_recog_loss: 0.002 
+52m 44s (- 641m 19s) niter: 1140 completed:   7%) g_loss: 0.058  g_recon_loss: 0.005  g_kld_loss: 0.400  g_recog_loss: 0.053  d_loss: 0.002  d_recog_loss: 0.002 
+53m 39s (- 640m 14s) niter: 1160 completed:   7%) g_loss: 0.058  g_recon_loss: 0.004  g_kld_loss: 0.331  g_recog_loss: 0.053  d_loss: 0.002  d_recog_loss: 0.002 
+54m 34s (- 639m 11s) niter: 1180 completed:   7%) g_loss: 0.059  g_recon_loss: 0.005  g_kld_loss: 0.392  g_recog_loss: 0.054  d_loss: 0.002  d_recog_loss: 0.002 
+55m 29s (- 638m 11s) niter: 1200 completed:   8%) g_loss: 0.061  g_recon_loss: 0.005  g_kld_loss: 0.524  g_recog_loss: 0.055  d_loss: 0.002  d_recog_loss: 0.002 
+56m 24s (- 637m 3s) niter: 1220 completed:   8%) g_loss: 0.061  g_recon_loss: 0.006  g_kld_loss: 0.582  g_recog_loss: 0.055  d_loss: 0.002  d_recog_loss: 0.002 
+57m 18s (- 636m 0s) niter: 1240 completed:   8%) g_loss: 0.058  g_recon_loss: 0.005  g_kld_loss: 0.427  g_recog_loss: 0.053  d_loss: 0.002  d_recog_loss: 0.002 
+58m 13s (- 634m 58s) niter: 1260 completed:   8%) g_loss: 0.057  g_recon_loss: 0.005  g_kld_loss: 0.319  g_recog_loss: 0.052  d_loss: 0.002  d_recog_loss: 0.002 
+59m 7s (- 633m 44s) niter: 1280 completed:   8%) g_loss: 0.056  g_recon_loss: 0.005  g_kld_loss: 0.339  g_recog_loss: 0.051  d_loss: 0.002  d_recog_loss: 0.002 
+60m 2s (- 632m 44s) niter: 1300 completed:   8%) g_loss: 0.056  g_recon_loss: 0.005  g_kld_loss: 0.373  g_recog_loss: 0.051  d_loss: 0.002  d_recog_loss: 0.002 
+60m 57s (- 631m 44s) niter: 1320 completed:   8%) g_loss: 0.055  g_recon_loss: 0.004  g_kld_loss: 0.335  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+61m 52s (- 630m 43s) niter: 1340 completed:   8%) g_loss: 0.055  g_recon_loss: 0.004  g_kld_loss: 0.287  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+62m 48s (- 629m 51s) niter: 1360 completed:   9%) g_loss: 0.055  g_recon_loss: 0.004  g_kld_loss: 0.371  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+63m 43s (- 628m 54s) niter: 1380 completed:   9%) g_loss: 0.055  g_recon_loss: 0.005  g_kld_loss: 0.456  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+64m 38s (- 627m 59s) niter: 1400 completed:   9%) g_loss: 0.054  g_recon_loss: 0.004  g_kld_loss: 0.358  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+65m 34s (- 627m 6s) niter: 1420 completed:   9%) g_loss: 0.054  g_recon_loss: 0.004  g_kld_loss: 0.369  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+66m 29s (- 626m 10s) niter: 1440 completed:   9%) g_loss: 0.055  g_recon_loss: 0.004  g_kld_loss: 0.409  g_recog_loss: 0.051  d_loss: 0.002  d_recog_loss: 0.002 
+67m 25s (- 625m 17s) niter: 1460 completed:   9%) g_loss: 0.054  g_recon_loss: 0.004  g_kld_loss: 0.400  g_recog_loss: 0.049  d_loss: 0.002  d_recog_loss: 0.002 
+68m 21s (- 624m 24s) niter: 1480 completed:   9%) g_loss: 0.053  g_recon_loss: 0.004  g_kld_loss: 0.362  g_recog_loss: 0.049  d_loss: 0.002  d_recog_loss: 0.002 
+69m 16s (- 623m 28s) niter: 1500 completed:  10%) g_loss: 0.054  g_recon_loss: 0.004  g_kld_loss: 0.374  g_recog_loss: 0.049  d_loss: 0.002  d_recog_loss: 0.002 
+70m 11s (- 622m 29s) niter: 1520 completed:  10%) g_loss: 0.054  g_recon_loss: 0.004  g_kld_loss: 0.393  g_recog_loss: 0.049  d_loss: 0.002  d_recog_loss: 0.002 
+71m 6s (- 621m 33s) niter: 1540 completed:  10%) g_loss: 0.053  g_recon_loss: 0.004  g_kld_loss: 0.347  g_recog_loss: 0.049  d_loss: 0.002  d_recog_loss: 0.002 
+72m 2s (- 620m 38s) niter: 1560 completed:  10%) g_loss: 0.055  g_recon_loss: 0.005  g_kld_loss: 0.524  g_recog_loss: 0.050  d_loss: 0.002  d_recog_loss: 0.002 
+72m 57s (- 619m 38s) niter: 1580 completed:  10%) g_loss: 0.053  g_recon_loss: 0.005  g_kld_loss: 0.480  g_recog_loss: 0.048  d_loss: 0.002  d_recog_loss: 0.002 
+73m 52s (- 618m 41s) niter: 1600 completed:  10%) g_loss: 0.052  g_recon_loss: 0.004  g_kld_loss: 0.396  g_recog_loss: 0.047  d_loss: 0.002  d_recog_loss: 0.002 
+74m 47s (- 617m 44s) niter: 1620 completed:  10%) g_loss: 0.051  g_recon_loss: 0.004  g_kld_loss: 0.360  g_recog_loss: 0.047  d_loss: 0.002  d_recog_loss: 0.002 
+75m 42s (- 616m 45s) niter: 1640 completed:  10%) g_loss: 0.051  g_recon_loss: 0.004  g_kld_loss: 0.330  g_recog_loss: 0.047  d_loss: 0.002  d_recog_loss: 0.002 
+76m 38s (- 615m 50s) niter: 1660 completed:  11%) g_loss: 0.051  g_recon_loss: 0.004  g_kld_loss: 0.344  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+77m 33s (- 614m 55s) niter: 1680 completed:  11%) g_loss: 0.050  g_recon_loss: 0.004  g_kld_loss: 0.335  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+78m 28s (- 614m 0s) niter: 1700 completed:  11%) g_loss: 0.050  g_recon_loss: 0.004  g_kld_loss: 0.345  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+79m 24s (- 613m 5s) niter: 1720 completed:  11%) g_loss: 0.050  g_recon_loss: 0.004  g_kld_loss: 0.377  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+80m 19s (- 612m 10s) niter: 1740 completed:  11%) g_loss: 0.050  g_recon_loss: 0.004  g_kld_loss: 0.418  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+81m 15s (- 611m 17s) niter: 1760 completed:  11%) g_loss: 0.051  g_recon_loss: 0.004  g_kld_loss: 0.379  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+82m 11s (- 610m 23s) niter: 1780 completed:  11%) g_loss: 0.051  g_recon_loss: 0.004  g_kld_loss: 0.491  g_recog_loss: 0.046  d_loss: 0.002  d_recog_loss: 0.002 
+83m 5s (- 609m 23s) niter: 1800 completed:  12%) g_loss: 0.050  g_recon_loss: 0.004  g_kld_loss: 0.524  g_recog_loss: 0.045  d_loss: 0.002  d_recog_loss: 0.002 
+84m 1s (- 608m 28s) niter: 1820 completed:  12%) g_loss: 0.049  g_recon_loss: 0.004  g_kld_loss: 0.519  g_recog_loss: 0.044  d_loss: 0.002  d_recog_loss: 0.002 
+84m 56s (- 607m 32s) niter: 1840 completed:  12%) g_loss: 0.048  g_recon_loss: 0.004  g_kld_loss: 0.365  g_recog_loss: 0.044  d_loss: 0.002  d_recog_loss: 0.002 
+85m 52s (- 606m 37s) niter: 1860 completed:  12%) g_loss: 0.048  g_recon_loss: 0.004  g_kld_loss: 0.391  g_recog_loss: 0.044  d_loss: 0.002  d_recog_loss: 0.002 
+86m 47s (- 605m 40s) niter: 1880 completed:  12%) g_loss: 0.048  g_recon_loss: 0.004  g_kld_loss: 0.467  g_recog_loss: 0.043  d_loss: 0.001  d_recog_loss: 0.001 
+87m 42s (- 604m 44s) niter: 1900 completed:  12%) g_loss: 0.048  g_recon_loss: 0.004  g_kld_loss: 0.392  g_recog_loss: 0.043  d_loss: 0.001  d_recog_loss: 0.001 
+88m 37s (- 603m 45s) niter: 1920 completed:  12%) g_loss: 0.048  g_recon_loss: 0.004  g_kld_loss: 0.425  g_recog_loss: 0.044  d_loss: 0.001  d_recog_loss: 0.001 
+89m 32s (- 602m 49s) niter: 1940 completed:  12%) g_loss: 0.047  g_recon_loss: 0.004  g_kld_loss: 0.359  g_recog_loss: 0.043  d_loss: 0.001  d_recog_loss: 0.001 
+90m 27s (- 601m 52s) niter: 1960 completed:  13%) g_loss: 0.047  g_recon_loss: 0.004  g_kld_loss: 0.363  g_recog_loss: 0.043  d_loss: 0.001  d_recog_loss: 0.001 
+91m 23s (- 600m 56s) niter: 1980 completed:  13%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.378  g_recog_loss: 0.042  d_loss: 0.001  d_recog_loss: 0.001 
+92m 18s (- 600m 0s) niter: 2000 completed:  13%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.410  g_recog_loss: 0.042  d_loss: 0.001  d_recog_loss: 0.001 
+93m 14s (- 599m 9s) niter: 2020 completed:  13%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.458  g_recog_loss: 0.042  d_loss: 0.001  d_recog_loss: 0.001 
+94m 10s (- 598m 14s) niter: 2040 completed:  13%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.444  g_recog_loss: 0.042  d_loss: 0.001  d_recog_loss: 0.001 
+95m 5s (- 597m 19s) niter: 2060 completed:  13%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.432  g_recog_loss: 0.042  d_loss: 0.001  d_recog_loss: 0.001 
+96m 0s (- 596m 24s) niter: 2080 completed:  13%) g_loss: 0.045  g_recon_loss: 0.004  g_kld_loss: 0.413  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+96m 56s (- 595m 28s) niter: 2100 completed:  14%) g_loss: 0.045  g_recon_loss: 0.004  g_kld_loss: 0.424  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+97m 51s (- 594m 32s) niter: 2120 completed:  14%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.413  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+98m 47s (- 593m 39s) niter: 2140 completed:  14%) g_loss: 0.045  g_recon_loss: 0.004  g_kld_loss: 0.413  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+99m 42s (- 592m 42s) niter: 2160 completed:  14%) g_loss: 0.044  g_recon_loss: 0.004  g_kld_loss: 0.427  g_recog_loss: 0.040  d_loss: 0.001  d_recog_loss: 0.001 
+100m 37s (- 591m 44s) niter: 2180 completed:  14%) g_loss: 0.044  g_recon_loss: 0.004  g_kld_loss: 0.398  g_recog_loss: 0.040  d_loss: 0.001  d_recog_loss: 0.001 
+101m 32s (- 590m 47s) niter: 2200 completed:  14%) g_loss: 0.044  g_recon_loss: 0.004  g_kld_loss: 0.426  g_recog_loss: 0.040  d_loss: 0.001  d_recog_loss: 0.001 
+102m 27s (- 589m 49s) niter: 2220 completed:  14%) g_loss: 0.045  g_recon_loss: 0.004  g_kld_loss: 0.372  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+103m 22s (- 588m 49s) niter: 2240 completed:  14%) g_loss: 0.046  g_recon_loss: 0.004  g_kld_loss: 0.454  g_recog_loss: 0.041  d_loss: 0.001  d_recog_loss: 0.001 
+104m 16s (- 587m 51s) niter: 2260 completed:  15%) g_loss: 0.044  g_recon_loss: 0.004  g_kld_loss: 0.374  g_recog_loss: 0.040  d_loss: 0.001  d_recog_loss: 0.001 
+105m 11s (- 586m 49s) niter: 2280 completed:  15%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.383  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+106m 5s (- 585m 47s) niter: 2300 completed:  15%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.378  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+106m 59s (- 584m 46s) niter: 2320 completed:  15%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.383  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+107m 53s (- 583m 45s) niter: 2340 completed:  15%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.467  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+108m 47s (- 582m 42s) niter: 2360 completed:  15%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.422  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+109m 42s (- 581m 43s) niter: 2380 completed:  15%) g_loss: 0.042  g_recon_loss: 0.004  g_kld_loss: 0.420  g_recog_loss: 0.038  d_loss: 0.001  d_recog_loss: 0.001 
+110m 36s (- 580m 43s) niter: 2400 completed:  16%) g_loss: 0.042  g_recon_loss: 0.004  g_kld_loss: 0.404  g_recog_loss: 0.038  d_loss: 0.001  d_recog_loss: 0.001 
+111m 31s (- 579m 43s) niter: 2420 completed:  16%) g_loss: 0.042  g_recon_loss: 0.004  g_kld_loss: 0.488  g_recog_loss: 0.038  d_loss: 0.001  d_recog_loss: 0.001 
+112m 26s (- 578m 46s) niter: 2440 completed:  16%) g_loss: 0.041  g_recon_loss: 0.003  g_kld_loss: 0.314  g_recog_loss: 0.038  d_loss: 0.001  d_recog_loss: 0.001 
+113m 20s (- 577m 47s) niter: 2460 completed:  16%) g_loss: 0.041  g_recon_loss: 0.004  g_kld_loss: 0.424  g_recog_loss: 0.037  d_loss: 0.001  d_recog_loss: 0.001 
+114m 15s (- 576m 48s) niter: 2480 completed:  16%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.430  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+115m 10s (- 575m 50s) niter: 2500 completed:  16%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.515  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+116m 4s (- 574m 51s) niter: 2520 completed:  16%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.411  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+116m 58s (- 573m 51s) niter: 2540 completed:  16%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.464  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+117m 54s (- 572m 57s) niter: 2560 completed:  17%) g_loss: 0.042  g_recon_loss: 0.004  g_kld_loss: 0.466  g_recog_loss: 0.037  d_loss: 0.001  d_recog_loss: 0.001 
+118m 50s (- 572m 3s) niter: 2580 completed:  17%) g_loss: 0.041  g_recon_loss: 0.004  g_kld_loss: 0.439  g_recog_loss: 0.037  d_loss: 0.001  d_recog_loss: 0.001 
+119m 45s (- 571m 10s) niter: 2600 completed:  17%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.402  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+120m 41s (- 570m 15s) niter: 2620 completed:  17%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.384  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+121m 36s (- 569m 20s) niter: 2640 completed:  17%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.397  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+122m 31s (- 568m 23s) niter: 2660 completed:  17%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.433  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+123m 27s (- 567m 31s) niter: 2680 completed:  17%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.435  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+124m 23s (- 566m 38s) niter: 2700 completed:  18%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.437  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+125m 18s (- 565m 45s) niter: 2720 completed:  18%) g_loss: 0.043  g_recon_loss: 0.004  g_kld_loss: 0.484  g_recog_loss: 0.039  d_loss: 0.001  d_recog_loss: 0.001 
+126m 15s (- 564m 55s) niter: 2740 completed:  18%) g_loss: 0.041  g_recon_loss: 0.004  g_kld_loss: 0.460  g_recog_loss: 0.037  d_loss: 0.001  d_recog_loss: 0.001 
+127m 11s (- 564m 1s) niter: 2760 completed:  18%) g_loss: 0.040  g_recon_loss: 0.003  g_kld_loss: 0.421  g_recog_loss: 0.036  d_loss: 0.001  d_recog_loss: 0.001 
+128m 6s (- 563m 8s) niter: 2780 completed:  18%) g_loss: 0.039  g_recon_loss: 0.003  g_kld_loss: 0.432  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+129m 1s (- 562m 12s) niter: 2800 completed:  18%) g_loss: 0.039  g_recon_loss: 0.003  g_kld_loss: 0.416  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+129m 56s (- 561m 14s) niter: 2820 completed:  18%) g_loss: 0.039  g_recon_loss: 0.003  g_kld_loss: 0.408  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+130m 51s (- 560m 18s) niter: 2840 completed:  18%) g_loss: 0.039  g_recon_loss: 0.003  g_kld_loss: 0.454  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+131m 47s (- 559m 24s) niter: 2860 completed:  19%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.456  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+132m 42s (- 558m 28s) niter: 2880 completed:  19%) g_loss: 0.039  g_recon_loss: 0.003  g_kld_loss: 0.479  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+133m 37s (- 557m 30s) niter: 2900 completed:  19%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.402  g_recog_loss: 0.035  d_loss: 0.001  d_recog_loss: 0.001 
+134m 32s (- 556m 36s) niter: 2920 completed:  19%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.426  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+135m 27s (- 555m 39s) niter: 2940 completed:  19%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.495  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+136m 21s (- 554m 40s) niter: 2960 completed:  19%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.414  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+137m 16s (- 553m 41s) niter: 2980 completed:  19%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.455  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+138m 10s (- 552m 43s) niter: 3000 completed:  20%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.462  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+139m 6s (- 551m 48s) niter: 3020 completed:  20%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.432  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+140m 1s (- 550m 51s) niter: 3040 completed:  20%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.441  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+140m 56s (- 549m 56s) niter: 3060 completed:  20%) g_loss: 0.038  g_recon_loss: 0.003  g_kld_loss: 0.485  g_recog_loss: 0.034  d_loss: 0.001  d_recog_loss: 0.001 
+141m 51s (- 549m 1s) niter: 3080 completed:  20%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.448  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+142m 47s (- 548m 7s) niter: 3100 completed:  20%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.490  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+143m 42s (- 547m 11s) niter: 3120 completed:  20%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.499  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+144m 37s (- 546m 16s) niter: 3140 completed:  20%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.398  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+145m 33s (- 545m 22s) niter: 3160 completed:  21%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.441  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+146m 28s (- 544m 26s) niter: 3180 completed:  21%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.460  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+147m 23s (- 543m 29s) niter: 3200 completed:  21%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.522  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+148m 18s (- 542m 33s) niter: 3220 completed:  21%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.465  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+149m 12s (- 541m 35s) niter: 3240 completed:  21%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.468  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+150m 7s (- 540m 39s) niter: 3260 completed:  21%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.389  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+151m 3s (- 539m 43s) niter: 3280 completed:  21%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.449  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+151m 57s (- 538m 46s) niter: 3300 completed:  22%) g_loss: 0.035  g_recon_loss: 0.003  g_kld_loss: 0.422  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+152m 52s (- 537m 50s) niter: 3320 completed:  22%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.464  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+153m 47s (- 536m 54s) niter: 3340 completed:  22%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.509  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+154m 42s (- 535m 58s) niter: 3360 completed:  22%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.562  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+155m 37s (- 535m 2s) niter: 3380 completed:  22%) g_loss: 0.036  g_recon_loss: 0.003  g_kld_loss: 0.504  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+156m 33s (- 534m 6s) niter: 3400 completed:  22%) g_loss: 0.035  g_recon_loss: 0.003  g_kld_loss: 0.401  g_recog_loss: 0.032  d_loss: 0.001  d_recog_loss: 0.001 
+157m 27s (- 533m 10s) niter: 3420 completed:  22%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.429  g_recog_loss: 0.031  d_loss: 0.001  d_recog_loss: 0.001 
+158m 23s (- 532m 14s) niter: 3440 completed:  22%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.414  g_recog_loss: 0.031  d_loss: 0.001  d_recog_loss: 0.001 
+159m 21s (- 531m 28s) niter: 3460 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.460  g_recog_loss: 0.031  d_loss: 0.001  d_recog_loss: 0.001 
+160m 18s (- 530m 42s) niter: 3480 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.572  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+161m 16s (- 529m 55s) niter: 3500 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.510  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+162m 14s (- 529m 7s) niter: 3520 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.434  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+163m 12s (- 528m 22s) niter: 3540 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.515  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+164m 11s (- 527m 37s) niter: 3560 completed:  23%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.438  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+165m 10s (- 526m 53s) niter: 3580 completed:  23%) g_loss: 0.033  g_recon_loss: 0.003  g_kld_loss: 0.445  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+166m 9s (- 526m 9s) niter: 3600 completed:  24%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.565  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+167m 8s (- 525m 25s) niter: 3620 completed:  24%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.547  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+168m 6s (- 524m 40s) niter: 3640 completed:  24%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.489  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+169m 4s (- 523m 49s) niter: 3660 completed:  24%) g_loss: 0.037  g_recon_loss: 0.003  g_kld_loss: 0.479  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+170m 0s (- 522m 57s) niter: 3680 completed:  24%) g_loss: 0.038  g_recon_loss: 0.004  g_kld_loss: 0.772  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+170m 57s (- 522m 5s) niter: 3700 completed:  24%) g_loss: 0.034  g_recon_loss: 0.003  g_kld_loss: 0.472  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+171m 52s (- 521m 11s) niter: 3720 completed:  24%) g_loss: 0.033  g_recon_loss: 0.003  g_kld_loss: 0.415  g_recog_loss: 0.029  d_loss: 0.001  d_recog_loss: 0.001 
+172m 47s (- 520m 12s) niter: 3740 completed:  24%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.399  g_recog_loss: 0.029  d_loss: 0.001  d_recog_loss: 0.001 
+173m 42s (- 519m 15s) niter: 3760 completed:  25%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.406  g_recog_loss: 0.029  d_loss: 0.001  d_recog_loss: 0.001 
+174m 36s (- 518m 18s) niter: 3780 completed:  25%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.406  g_recog_loss: 0.029  d_loss: 0.001  d_recog_loss: 0.001 
+175m 31s (- 517m 19s) niter: 3800 completed:  25%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.407  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+176m 25s (- 516m 21s) niter: 3820 completed:  25%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.429  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+177m 20s (- 515m 23s) niter: 3840 completed:  25%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.360  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+178m 14s (- 514m 24s) niter: 3860 completed:  25%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.442  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+179m 9s (- 513m 28s) niter: 3880 completed:  25%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.483  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+180m 4s (- 512m 30s) niter: 3900 completed:  26%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.504  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+180m 59s (- 511m 34s) niter: 3920 completed:  26%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.456  g_recog_loss: 0.029  d_loss: 0.001  d_recog_loss: 0.001 
+181m 54s (- 510m 39s) niter: 3940 completed:  26%) g_loss: 0.032  g_recon_loss: 0.003  g_kld_loss: 0.514  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+182m 51s (- 509m 46s) niter: 3960 completed:  26%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.464  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+183m 47s (- 508m 53s) niter: 3980 completed:  26%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.404  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+184m 43s (- 508m 0s) niter: 4000 completed:  26%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.378  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+185m 40s (- 507m 7s) niter: 4020 completed:  26%) g_loss: 0.030  g_recon_loss: 0.003  g_kld_loss: 0.486  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+186m 36s (- 506m 14s) niter: 4040 completed:  26%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.485  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+187m 33s (- 505m 22s) niter: 4060 completed:  27%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.462  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+188m 28s (- 504m 26s) niter: 4080 completed:  27%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.506  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+189m 24s (- 503m 32s) niter: 4100 completed:  27%) g_loss: 0.030  g_recon_loss: 0.003  g_kld_loss: 0.459  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+190m 21s (- 502m 42s) niter: 4120 completed:  27%) g_loss: 0.030  g_recon_loss: 0.003  g_kld_loss: 0.474  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+191m 18s (- 501m 49s) niter: 4140 completed:  27%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.395  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+192m 14s (- 500m 55s) niter: 4160 completed:  27%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.439  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+193m 9s (- 500m 0s) niter: 4180 completed:  27%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.426  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+194m 5s (- 499m 5s) niter: 4200 completed:  28%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.392  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+195m 0s (- 498m 9s) niter: 4220 completed:  28%) g_loss: 0.031  g_recon_loss: 0.003  g_kld_loss: 0.499  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+195m 56s (- 497m 14s) niter: 4240 completed:  28%) g_loss: 0.035  g_recon_loss: 0.004  g_kld_loss: 0.787  g_recog_loss: 0.030  d_loss: 0.001  d_recog_loss: 0.001 
+196m 51s (- 496m 19s) niter: 4260 completed:  28%) g_loss: 0.030  g_recon_loss: 0.003  g_kld_loss: 0.476  g_recog_loss: 0.027  d_loss: 0.001  d_recog_loss: 0.001 
+197m 47s (- 495m 23s) niter: 4280 completed:  28%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.456  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+198m 42s (- 494m 27s) niter: 4300 completed:  28%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.496  g_recog_loss: 0.026  d_loss: 0.001  d_recog_loss: 0.001 
+199m 38s (- 493m 32s) niter: 4320 completed:  28%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.377  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+200m 33s (- 492m 36s) niter: 4340 completed:  28%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.400  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+201m 29s (- 491m 41s) niter: 4360 completed:  29%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.401  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+202m 23s (- 490m 44s) niter: 4380 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.426  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+203m 18s (- 489m 47s) niter: 4400 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.505  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+204m 13s (- 488m 50s) niter: 4420 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.356  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+205m 7s (- 487m 52s) niter: 4440 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.386  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+206m 2s (- 486m 55s) niter: 4460 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.408  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+206m 57s (- 485m 57s) niter: 4480 completed:  29%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.476  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+207m 51s (- 485m 0s) niter: 4500 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.434  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+208m 46s (- 484m 2s) niter: 4520 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.477  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+209m 41s (- 483m 6s) niter: 4540 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.419  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+210m 36s (- 482m 10s) niter: 4560 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.480  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+211m 30s (- 481m 11s) niter: 4580 completed:  30%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.381  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+212m 25s (- 480m 15s) niter: 4600 completed:  30%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.372  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+213m 20s (- 479m 18s) niter: 4620 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.487  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+214m 14s (- 478m 20s) niter: 4640 completed:  30%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.492  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+215m 9s (- 477m 24s) niter: 4660 completed:  31%) g_loss: 0.028  g_recon_loss: 0.003  g_kld_loss: 0.530  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+216m 4s (- 476m 28s) niter: 4680 completed:  31%) g_loss: 0.029  g_recon_loss: 0.003  g_kld_loss: 0.611  g_recog_loss: 0.025  d_loss: 0.001  d_recog_loss: 0.001 
+216m 59s (- 475m 31s) niter: 4700 completed:  31%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.513  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+217m 54s (- 474m 35s) niter: 4720 completed:  31%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.487  g_recog_loss: 0.024  d_loss: 0.001  d_recog_loss: 0.001 
+218m 49s (- 473m 38s) niter: 4740 completed:  31%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.411  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+219m 43s (- 472m 41s) niter: 4760 completed:  31%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.446  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+220m 38s (- 471m 44s) niter: 4780 completed:  31%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.433  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+221m 32s (- 470m 46s) niter: 4800 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.378  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+222m 27s (- 469m 49s) niter: 4820 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.519  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+223m 23s (- 468m 55s) niter: 4840 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.500  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+224m 18s (- 468m 0s) niter: 4860 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.479  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+225m 14s (- 467m 5s) niter: 4880 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.421  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+226m 10s (- 466m 11s) niter: 4900 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.412  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+227m 5s (- 465m 16s) niter: 4920 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.489  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+228m 1s (- 464m 20s) niter: 4940 completed:  32%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.457  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+228m 56s (- 463m 26s) niter: 4960 completed:  33%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.515  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+229m 52s (- 462m 30s) niter: 4980 completed:  33%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.436  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+230m 47s (- 461m 34s) niter: 5000 completed:  33%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.495  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+231m 42s (- 460m 39s) niter: 5020 completed:  33%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.456  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+232m 36s (- 459m 41s) niter: 5040 completed:  33%) g_loss: 0.027  g_recon_loss: 0.003  g_kld_loss: 0.625  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+233m 30s (- 458m 42s) niter: 5060 completed:  33%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.485  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+234m 24s (- 457m 44s) niter: 5080 completed:  33%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.377  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+235m 18s (- 456m 46s) niter: 5100 completed:  34%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.457  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+236m 11s (- 455m 47s) niter: 5120 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.404  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+237m 5s (- 454m 48s) niter: 5140 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.471  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+237m 58s (- 453m 49s) niter: 5160 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.394  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+238m 52s (- 452m 49s) niter: 5180 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.431  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+239m 45s (- 451m 50s) niter: 5200 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.379  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+240m 38s (- 450m 52s) niter: 5220 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.441  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+241m 32s (- 449m 53s) niter: 5240 completed:  34%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.396  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+242m 26s (- 448m 56s) niter: 5260 completed:  35%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.469  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+243m 20s (- 447m 57s) niter: 5280 completed:  35%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.544  g_recog_loss: 0.023  d_loss: 0.001  d_recog_loss: 0.001 
+244m 14s (- 446m 59s) niter: 5300 completed:  35%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.478  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+245m 8s (- 446m 2s) niter: 5320 completed:  35%) g_loss: 0.026  g_recon_loss: 0.003  g_kld_loss: 0.610  g_recog_loss: 0.022  d_loss: 0.001  d_recog_loss: 0.001 
+246m 1s (- 445m 4s) niter: 5340 completed:  35%) g_loss: 0.025  g_recon_loss: 0.003  g_kld_loss: 0.552  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+246m 55s (- 444m 6s) niter: 5360 completed:  35%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.398  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+247m 50s (- 443m 9s) niter: 5380 completed:  35%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.336  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+248m 44s (- 442m 11s) niter: 5400 completed:  36%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.440  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+249m 38s (- 441m 14s) niter: 5420 completed:  36%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.385  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+250m 33s (- 440m 18s) niter: 5440 completed:  36%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.484  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+251m 28s (- 439m 22s) niter: 5460 completed:  36%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.390  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+252m 24s (- 438m 29s) niter: 5480 completed:  36%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.480  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+253m 20s (- 437m 35s) niter: 5500 completed:  36%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.393  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+254m 16s (- 436m 41s) niter: 5520 completed:  36%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.483  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+255m 13s (- 435m 49s) niter: 5540 completed:  36%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.505  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+256m 10s (- 434m 57s) niter: 5560 completed:  37%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.462  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+257m 7s (- 434m 3s) niter: 5580 completed:  37%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.518  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+258m 4s (- 433m 11s) niter: 5600 completed:  37%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.359  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+259m 2s (- 432m 20s) niter: 5620 completed:  37%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.483  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+259m 58s (- 431m 27s) niter: 5640 completed:  37%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.478  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+260m 56s (- 430m 35s) niter: 5660 completed:  37%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.529  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+261m 54s (- 429m 44s) niter: 5680 completed:  37%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.582  g_recog_loss: 0.021  d_loss: 0.001  d_recog_loss: 0.001 
+262m 50s (- 428m 50s) niter: 5700 completed:  38%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.586  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+263m 46s (- 427m 56s) niter: 5720 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.419  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+264m 41s (- 427m 1s) niter: 5740 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.366  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+265m 37s (- 426m 6s) niter: 5760 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.444  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+266m 33s (- 425m 11s) niter: 5780 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.425  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+267m 29s (- 424m 17s) niter: 5800 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.432  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+268m 24s (- 423m 22s) niter: 5820 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.495  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+269m 18s (- 422m 25s) niter: 5840 completed:  38%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.473  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+270m 13s (- 421m 29s) niter: 5860 completed:  39%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.474  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+271m 8s (- 420m 33s) niter: 5880 completed:  39%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.509  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+272m 3s (- 419m 37s) niter: 5900 completed:  39%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.450  g_recog_loss: 0.019  d_loss: 0.001  d_recog_loss: 0.001 
+272m 59s (- 418m 42s) niter: 5920 completed:  39%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.401  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+273m 55s (- 417m 47s) niter: 5940 completed:  39%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.426  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+274m 50s (- 416m 52s) niter: 5960 completed:  39%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.425  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+275m 46s (- 415m 57s) niter: 5980 completed:  39%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.392  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+276m 41s (- 415m 2s) niter: 6000 completed:  40%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.500  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+277m 37s (- 414m 7s) niter: 6020 completed:  40%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.519  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+278m 32s (- 413m 12s) niter: 6040 completed:  40%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.428  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+279m 29s (- 412m 18s) niter: 6060 completed:  40%) g_loss: 0.021  g_recon_loss: 0.002  g_kld_loss: 0.373  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+280m 25s (- 411m 24s) niter: 6080 completed:  40%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.520  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+281m 21s (- 410m 30s) niter: 6100 completed:  40%) g_loss: 0.023  g_recon_loss: 0.003  g_kld_loss: 0.617  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+282m 18s (- 409m 36s) niter: 6120 completed:  40%) g_loss: 0.024  g_recon_loss: 0.003  g_kld_loss: 0.684  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+283m 13s (- 408m 41s) niter: 6140 completed:  40%) g_loss: 0.022  g_recon_loss: 0.003  g_kld_loss: 0.529  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+284m 9s (- 407m 46s) niter: 6160 completed:  41%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.428  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+285m 5s (- 406m 52s) niter: 6180 completed:  41%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.377  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+286m 0s (- 405m 56s) niter: 6200 completed:  41%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.382  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+286m 56s (- 405m 3s) niter: 6220 completed:  41%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.482  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+287m 52s (- 404m 8s) niter: 6240 completed:  41%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.503  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+288m 48s (- 403m 13s) niter: 6260 completed:  41%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.434  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+289m 42s (- 402m 16s) niter: 6280 completed:  41%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.443  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+290m 37s (- 401m 20s) niter: 6300 completed:  42%) g_loss: 0.020  g_recon_loss: 0.002  g_kld_loss: 0.359  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+291m 32s (- 400m 24s) niter: 6320 completed:  42%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.471  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+292m 27s (- 399m 28s) niter: 6340 completed:  42%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.429  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+293m 22s (- 398m 32s) niter: 6360 completed:  42%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.436  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+294m 17s (- 397m 37s) niter: 6380 completed:  42%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.581  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+295m 13s (- 396m 41s) niter: 6400 completed:  42%) g_loss: 0.021  g_recon_loss: 0.003  g_kld_loss: 0.498  g_recog_loss: 0.018  d_loss: 0.001  d_recog_loss: 0.001 
+296m 8s (- 395m 46s) niter: 6420 completed:  42%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.465  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+297m 3s (- 394m 50s) niter: 6440 completed:  42%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.430  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+297m 58s (- 393m 55s) niter: 6460 completed:  43%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.430  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+298m 53s (- 392m 58s) niter: 6480 completed:  43%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.436  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+299m 47s (- 392m 2s) niter: 6500 completed:  43%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.504  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+300m 42s (- 391m 6s) niter: 6520 completed:  43%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.489  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+301m 37s (- 390m 11s) niter: 6540 completed:  43%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.456  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+302m 32s (- 389m 14s) niter: 6560 completed:  43%) g_loss: 0.020  g_recon_loss: 0.002  g_kld_loss: 0.409  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+303m 27s (- 388m 18s) niter: 6580 completed:  43%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.528  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+304m 22s (- 387m 22s) niter: 6600 completed:  44%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.474  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+305m 16s (- 386m 26s) niter: 6620 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.358  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+306m 11s (- 385m 30s) niter: 6640 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.395  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+307m 6s (- 384m 34s) niter: 6660 completed:  44%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.444  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+308m 0s (- 383m 38s) niter: 6680 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.406  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+308m 55s (- 382m 42s) niter: 6700 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.398  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+309m 50s (- 381m 46s) niter: 6720 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.446  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+310m 45s (- 380m 51s) niter: 6740 completed:  44%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.418  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+311m 41s (- 379m 55s) niter: 6760 completed:  45%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.476  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+312m 36s (- 378m 59s) niter: 6780 completed:  45%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.470  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+313m 30s (- 378m 3s) niter: 6800 completed:  45%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.412  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+314m 25s (- 377m 7s) niter: 6820 completed:  45%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.489  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+315m 19s (- 376m 11s) niter: 6840 completed:  45%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.468  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+316m 14s (- 375m 14s) niter: 6860 completed:  45%) g_loss: 0.019  g_recon_loss: 0.002  g_kld_loss: 0.413  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+317m 8s (- 374m 18s) niter: 6880 completed:  45%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.478  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+318m 3s (- 373m 22s) niter: 6900 completed:  46%) g_loss: 0.020  g_recon_loss: 0.003  g_kld_loss: 0.581  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+318m 56s (- 372m 24s) niter: 6920 completed:  46%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.555  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+319m 51s (- 371m 28s) niter: 6940 completed:  46%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.523  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+320m 45s (- 370m 31s) niter: 6960 completed:  46%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.433  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+321m 39s (- 369m 35s) niter: 6980 completed:  46%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.372  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+322m 35s (- 368m 40s) niter: 7000 completed:  46%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.388  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+323m 30s (- 367m 45s) niter: 7020 completed:  46%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.444  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+324m 26s (- 366m 50s) niter: 7040 completed:  46%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.328  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+325m 21s (- 365m 54s) niter: 7060 completed:  47%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.394  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+326m 17s (- 364m 59s) niter: 7080 completed:  47%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.503  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+327m 11s (- 364m 4s) niter: 7100 completed:  47%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.462  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+328m 7s (- 363m 8s) niter: 7120 completed:  47%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.396  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+329m 3s (- 362m 14s) niter: 7140 completed:  47%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.527  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+329m 58s (- 361m 18s) niter: 7160 completed:  47%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+330m 54s (- 360m 24s) niter: 7180 completed:  47%) g_loss: 0.018  g_recon_loss: 0.002  g_kld_loss: 0.455  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+331m 50s (- 359m 29s) niter: 7200 completed:  48%) g_loss: 0.033  g_recon_loss: 0.004  g_kld_loss: 1.157  g_recog_loss: 0.028  d_loss: 0.001  d_recog_loss: 0.001 
+332m 45s (- 358m 34s) niter: 7220 completed:  48%) g_loss: 0.042  g_recon_loss: 0.007  g_kld_loss: 1.429  g_recog_loss: 0.033  d_loss: 0.001  d_recog_loss: 0.001 
+333m 41s (- 357m 39s) niter: 7240 completed:  48%) g_loss: 0.026  g_recon_loss: 0.005  g_kld_loss: 0.654  g_recog_loss: 0.020  d_loss: 0.001  d_recog_loss: 0.001 
+334m 37s (- 356m 44s) niter: 7260 completed:  48%) g_loss: 0.022  g_recon_loss: 0.004  g_kld_loss: 0.486  g_recog_loss: 0.017  d_loss: 0.001  d_recog_loss: 0.001 
+335m 32s (- 355m 49s) niter: 7280 completed:  48%) g_loss: 0.020  g_recon_loss: 0.004  g_kld_loss: 0.427  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+336m 28s (- 354m 54s) niter: 7300 completed:  48%) g_loss: 0.020  g_recon_loss: 0.004  g_kld_loss: 0.460  g_recog_loss: 0.016  d_loss: 0.001  d_recog_loss: 0.001 
+337m 24s (- 353m 59s) niter: 7320 completed:  48%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.477  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+338m 19s (- 353m 4s) niter: 7340 completed:  48%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.419  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+339m 15s (- 352m 9s) niter: 7360 completed:  49%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.463  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+340m 10s (- 351m 14s) niter: 7380 completed:  49%) g_loss: 0.019  g_recon_loss: 0.003  g_kld_loss: 0.452  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+341m 5s (- 350m 18s) niter: 7400 completed:  49%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.483  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+342m 0s (- 349m 22s) niter: 7420 completed:  49%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.476  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+342m 55s (- 348m 26s) niter: 7440 completed:  49%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.495  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+343m 49s (- 347m 30s) niter: 7460 completed:  49%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.450  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+344m 44s (- 346m 34s) niter: 7480 completed:  49%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.407  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+345m 38s (- 345m 38s) niter: 7500 completed:  50%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.447  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+346m 33s (- 344m 42s) niter: 7520 completed:  50%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.431  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+347m 27s (- 343m 46s) niter: 7540 completed:  50%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.482  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+348m 22s (- 342m 50s) niter: 7560 completed:  50%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.361  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+349m 16s (- 341m 54s) niter: 7580 completed:  50%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.403  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+350m 12s (- 340m 59s) niter: 7600 completed:  50%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.432  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+351m 7s (- 340m 3s) niter: 7620 completed:  50%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.431  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+352m 3s (- 339m 8s) niter: 7640 completed:  50%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.451  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+352m 58s (- 338m 13s) niter: 7660 completed:  51%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.487  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+353m 53s (- 337m 18s) niter: 7680 completed:  51%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.501  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+354m 48s (- 336m 22s) niter: 7700 completed:  51%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.443  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+355m 43s (- 335m 27s) niter: 7720 completed:  51%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.485  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+356m 39s (- 334m 32s) niter: 7740 completed:  51%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.394  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+357m 33s (- 333m 36s) niter: 7760 completed:  51%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.525  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+358m 29s (- 332m 40s) niter: 7780 completed:  51%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.504  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+359m 23s (- 331m 44s) niter: 7800 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.497  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+360m 18s (- 330m 48s) niter: 7820 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.461  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+361m 12s (- 329m 53s) niter: 7840 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.385  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+362m 7s (- 328m 57s) niter: 7860 completed:  52%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.383  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+363m 2s (- 328m 1s) niter: 7880 completed:  52%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.389  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+363m 57s (- 327m 5s) niter: 7900 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.522  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+364m 51s (- 326m 9s) niter: 7920 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.466  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+365m 45s (- 325m 13s) niter: 7940 completed:  52%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.485  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+366m 39s (- 324m 17s) niter: 7960 completed:  53%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.465  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+367m 33s (- 323m 20s) niter: 7980 completed:  53%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.447  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+368m 27s (- 322m 24s) niter: 8000 completed:  53%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.402  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+369m 21s (- 321m 28s) niter: 8020 completed:  53%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.420  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+370m 15s (- 320m 31s) niter: 8040 completed:  53%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.426  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+371m 9s (- 319m 35s) niter: 8060 completed:  53%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.647  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+372m 3s (- 318m 38s) niter: 8080 completed:  53%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.803  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+372m 57s (- 317m 42s) niter: 8100 completed:  54%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.550  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+373m 51s (- 316m 45s) niter: 8120 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.473  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+374m 44s (- 315m 48s) niter: 8140 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.403  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+375m 38s (- 314m 52s) niter: 8160 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.400  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+376m 31s (- 313m 55s) niter: 8180 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.482  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+377m 25s (- 312m 59s) niter: 8200 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.381  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+378m 19s (- 312m 3s) niter: 8220 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.431  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+379m 13s (- 311m 6s) niter: 8240 completed:  54%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.418  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+380m 8s (- 310m 11s) niter: 8260 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.383  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+381m 3s (- 309m 15s) niter: 8280 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.472  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+381m 57s (- 308m 19s) niter: 8300 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.405  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+382m 52s (- 307m 24s) niter: 8320 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.501  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+383m 46s (- 306m 28s) niter: 8340 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.528  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+384m 41s (- 305m 32s) niter: 8360 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.471  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+385m 36s (- 304m 37s) niter: 8380 completed:  55%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.461  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+386m 30s (- 303m 41s) niter: 8400 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.430  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+387m 25s (- 302m 45s) niter: 8420 completed:  56%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.501  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+388m 19s (- 301m 49s) niter: 8440 completed:  56%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.449  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+389m 15s (- 300m 55s) niter: 8460 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.470  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+390m 11s (- 300m 0s) niter: 8480 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.477  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+391m 6s (- 299m 5s) niter: 8500 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.423  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+392m 2s (- 298m 10s) niter: 8520 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.351  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+392m 57s (- 297m 14s) niter: 8540 completed:  56%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.411  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+393m 53s (- 296m 19s) niter: 8560 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.488  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+394m 48s (- 295m 25s) niter: 8580 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.467  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+395m 44s (- 294m 30s) niter: 8600 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.453  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+396m 40s (- 293m 35s) niter: 8620 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.418  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+397m 36s (- 292m 40s) niter: 8640 completed:  57%) g_loss: 0.015  g_recon_loss: 0.002  g_kld_loss: 0.406  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+398m 31s (- 291m 45s) niter: 8660 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.477  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+399m 26s (- 290m 50s) niter: 8680 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.445  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+400m 20s (- 289m 54s) niter: 8700 completed:  57%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.513  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+401m 15s (- 288m 58s) niter: 8720 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.419  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+402m 10s (- 288m 3s) niter: 8740 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.473  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+403m 4s (- 287m 7s) niter: 8760 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.431  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+403m 58s (- 286m 11s) niter: 8780 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.470  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+404m 53s (- 285m 15s) niter: 8800 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.475  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+405m 47s (- 284m 19s) niter: 8820 completed:  58%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.435  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+406m 41s (- 283m 23s) niter: 8840 completed:  58%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.390  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+407m 35s (- 282m 27s) niter: 8860 completed:  59%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.419  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+408m 30s (- 281m 32s) niter: 8880 completed:  59%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+409m 23s (- 280m 35s) niter: 8900 completed:  59%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.410  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+410m 18s (- 279m 40s) niter: 8920 completed:  59%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.514  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+411m 11s (- 278m 43s) niter: 8940 completed:  59%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.402  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+412m 5s (- 277m 47s) niter: 8960 completed:  59%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.474  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+412m 59s (- 276m 51s) niter: 8980 completed:  59%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.475  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+413m 53s (- 275m 55s) niter: 9000 completed:  60%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.495  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+414m 47s (- 274m 59s) niter: 9020 completed:  60%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.443  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+415m 41s (- 274m 3s) niter: 9040 completed:  60%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.487  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+416m 34s (- 273m 7s) niter: 9060 completed:  60%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.431  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+417m 28s (- 272m 11s) niter: 9080 completed:  60%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.458  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+418m 22s (- 271m 15s) niter: 9100 completed:  60%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.509  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+419m 16s (- 270m 19s) niter: 9120 completed:  60%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.454  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+420m 9s (- 269m 22s) niter: 9140 completed:  60%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.533  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+421m 3s (- 268m 26s) niter: 9160 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.413  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+421m 57s (- 267m 30s) niter: 9180 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.436  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+422m 50s (- 266m 34s) niter: 9200 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.456  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+423m 44s (- 265m 38s) niter: 9220 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.463  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+424m 38s (- 264m 42s) niter: 9240 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.431  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+425m 32s (- 263m 46s) niter: 9260 completed:  61%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.406  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+426m 26s (- 262m 50s) niter: 9280 completed:  61%) g_loss: 0.015  g_recon_loss: 0.002  g_kld_loss: 0.486  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+427m 19s (- 261m 54s) niter: 9300 completed:  62%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.644  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+428m 12s (- 260m 58s) niter: 9320 completed:  62%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.620  g_recog_loss: 0.012  d_loss: 0.001  d_recog_loss: 0.001 
+429m 7s (- 260m 2s) niter: 9340 completed:  62%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.397  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+430m 2s (- 259m 7s) niter: 9360 completed:  62%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.483  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+430m 57s (- 258m 12s) niter: 9380 completed:  62%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.440  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+431m 52s (- 257m 16s) niter: 9400 completed:  62%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.419  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+432m 46s (- 256m 21s) niter: 9420 completed:  62%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.482  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+433m 41s (- 255m 26s) niter: 9440 completed:  62%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.436  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+434m 36s (- 254m 30s) niter: 9460 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.432  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+435m 30s (- 253m 35s) niter: 9480 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.406  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+436m 24s (- 252m 39s) niter: 9500 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.383  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+437m 19s (- 251m 44s) niter: 9520 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+438m 14s (- 250m 48s) niter: 9540 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.506  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+439m 8s (- 249m 53s) niter: 9560 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.441  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+440m 2s (- 248m 57s) niter: 9580 completed:  63%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.443  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+440m 55s (- 248m 1s) niter: 9600 completed:  64%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.406  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+441m 49s (- 247m 5s) niter: 9620 completed:  64%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.445  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+442m 43s (- 246m 9s) niter: 9640 completed:  64%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.423  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+443m 37s (- 245m 13s) niter: 9660 completed:  64%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.670  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+444m 30s (- 244m 17s) niter: 9680 completed:  64%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.624  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+445m 24s (- 243m 22s) niter: 9700 completed:  64%) g_loss: 0.014  g_recon_loss: 0.003  g_kld_loss: 0.488  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+446m 18s (- 242m 26s) niter: 9720 completed:  64%) g_loss: 0.013  g_recon_loss: 0.003  g_kld_loss: 0.409  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+447m 11s (- 241m 30s) niter: 9740 completed:  64%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+448m 5s (- 240m 34s) niter: 9760 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.330  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+448m 59s (- 239m 38s) niter: 9780 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.432  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+449m 52s (- 238m 42s) niter: 9800 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.399  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+450m 46s (- 237m 46s) niter: 9820 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.362  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+451m 39s (- 236m 50s) niter: 9840 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.447  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+452m 32s (- 235m 54s) niter: 9860 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.355  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+453m 26s (- 234m 58s) niter: 9880 completed:  65%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.436  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+454m 19s (- 234m 2s) niter: 9900 completed:  66%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.453  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+455m 13s (- 233m 6s) niter: 9920 completed:  66%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.496  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+456m 6s (- 232m 11s) niter: 9940 completed:  66%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.369  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+457m 0s (- 231m 15s) niter: 9960 completed:  66%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+457m 53s (- 230m 19s) niter: 9980 completed:  66%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.372  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+458m 47s (- 229m 23s) niter: 10000 completed:  66%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.437  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+459m 41s (- 228m 28s) niter: 10020 completed:  66%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.392  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+460m 35s (- 227m 32s) niter: 10040 completed:  66%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.434  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+461m 30s (- 226m 37s) niter: 10060 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+462m 24s (- 225m 41s) niter: 10080 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.508  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+463m 18s (- 224m 46s) niter: 10100 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.455  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+464m 13s (- 223m 51s) niter: 10120 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.509  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+465m 7s (- 222m 55s) niter: 10140 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.414  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+466m 1s (- 222m 0s) niter: 10160 completed:  67%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.418  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+466m 55s (- 221m 4s) niter: 10180 completed:  67%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.714  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+467m 49s (- 220m 8s) niter: 10200 completed:  68%) g_loss: 0.016  g_recon_loss: 0.003  g_kld_loss: 0.621  g_recog_loss: 0.013  d_loss: 0.001  d_recog_loss: 0.001 
+468m 42s (- 219m 13s) niter: 10220 completed:  68%) g_loss: 0.013  g_recon_loss: 0.003  g_kld_loss: 0.531  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+469m 36s (- 218m 17s) niter: 10240 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.412  g_recog_loss: 0.010  d_loss: 0.001  d_recog_loss: 0.001 
+470m 29s (- 217m 21s) niter: 10260 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.487  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+471m 22s (- 216m 25s) niter: 10280 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.472  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+472m 16s (- 215m 30s) niter: 10300 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.400  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+473m 10s (- 214m 34s) niter: 10320 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.401  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+474m 3s (- 213m 38s) niter: 10340 completed:  68%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.409  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+474m 56s (- 212m 43s) niter: 10360 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.512  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+475m 50s (- 211m 47s) niter: 10380 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.457  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+476m 43s (- 210m 51s) niter: 10400 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+477m 36s (- 209m 55s) niter: 10420 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.462  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+478m 30s (- 209m 0s) niter: 10440 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.462  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+479m 23s (- 208m 4s) niter: 10460 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.499  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+480m 16s (- 207m 8s) niter: 10480 completed:  69%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.383  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+481m 10s (- 206m 12s) niter: 10500 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.367  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+482m 3s (- 205m 17s) niter: 10520 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.410  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+482m 56s (- 204m 21s) niter: 10540 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.411  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+483m 50s (- 203m 25s) niter: 10560 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.440  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+484m 43s (- 202m 30s) niter: 10580 completed:  70%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.460  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+485m 36s (- 201m 34s) niter: 10600 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.591  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+486m 29s (- 200m 38s) niter: 10620 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.464  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+487m 22s (- 199m 42s) niter: 10640 completed:  70%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.505  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+488m 15s (- 198m 47s) niter: 10660 completed:  71%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.404  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+489m 8s (- 197m 51s) niter: 10680 completed:  71%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.402  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+490m 1s (- 196m 55s) niter: 10700 completed:  71%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.446  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+490m 54s (- 195m 59s) niter: 10720 completed:  71%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.455  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+491m 47s (- 195m 4s) niter: 10740 completed:  71%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.413  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+492m 41s (- 194m 8s) niter: 10760 completed:  71%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.451  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+493m 34s (- 193m 13s) niter: 10780 completed:  71%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.408  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+494m 28s (- 192m 17s) niter: 10800 completed:  72%) g_loss: 0.012  g_recon_loss: 0.002  g_kld_loss: 0.553  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+495m 22s (- 191m 22s) niter: 10820 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.443  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+496m 15s (- 190m 26s) niter: 10840 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+497m 9s (- 189m 31s) niter: 10860 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.357  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+498m 2s (- 188m 35s) niter: 10880 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+498m 56s (- 187m 40s) niter: 10900 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.484  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+499m 50s (- 186m 45s) niter: 10920 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.464  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+500m 43s (- 185m 49s) niter: 10940 completed:  72%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.447  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+501m 37s (- 184m 54s) niter: 10960 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.417  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+502m 31s (- 183m 59s) niter: 10980 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.390  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+503m 24s (- 183m 3s) niter: 11000 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.471  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+504m 19s (- 182m 8s) niter: 11020 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.447  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+505m 13s (- 181m 13s) niter: 11040 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.491  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+506m 6s (- 180m 17s) niter: 11060 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.437  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+507m 0s (- 179m 22s) niter: 11080 completed:  73%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.495  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+507m 54s (- 178m 27s) niter: 11100 completed:  74%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.464  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+508m 48s (- 177m 32s) niter: 11120 completed:  74%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.446  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+509m 43s (- 176m 37s) niter: 11140 completed:  74%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+510m 38s (- 175m 42s) niter: 11160 completed:  74%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+511m 32s (- 174m 47s) niter: 11180 completed:  74%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.418  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+512m 27s (- 173m 52s) niter: 11200 completed:  74%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.730  g_recog_loss: 0.015  d_loss: 0.001  d_recog_loss: 0.001 
+513m 22s (- 172m 57s) niter: 11220 completed:  74%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.688  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+514m 17s (- 172m 2s) niter: 11240 completed:  74%) g_loss: 0.012  g_recon_loss: 0.003  g_kld_loss: 0.479  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+515m 13s (- 171m 7s) niter: 11260 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.415  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+516m 7s (- 170m 12s) niter: 11280 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.413  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+517m 2s (- 169m 17s) niter: 11300 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.435  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+517m 57s (- 168m 22s) niter: 11320 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.486  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+518m 51s (- 167m 27s) niter: 11340 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.468  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+519m 45s (- 166m 32s) niter: 11360 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.426  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+520m 40s (- 165m 37s) niter: 11380 completed:  75%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.455  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+521m 35s (- 164m 42s) niter: 11400 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.390  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+522m 30s (- 163m 47s) niter: 11420 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.437  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+523m 24s (- 162m 52s) niter: 11440 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.458  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+524m 19s (- 161m 57s) niter: 11460 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.437  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+525m 13s (- 161m 2s) niter: 11480 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.465  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+526m 8s (- 160m 7s) niter: 11500 completed:  76%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.439  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+527m 2s (- 159m 12s) niter: 11520 completed:  76%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.359  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+527m 57s (- 158m 17s) niter: 11540 completed:  76%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.423  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+528m 51s (- 157m 22s) niter: 11560 completed:  77%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.366  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+529m 47s (- 156m 27s) niter: 11580 completed:  77%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.441  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+530m 42s (- 155m 33s) niter: 11600 completed:  77%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.477  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+531m 37s (- 154m 38s) niter: 11620 completed:  77%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.706  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+532m 32s (- 153m 43s) niter: 11640 completed:  77%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.493  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+533m 27s (- 152m 48s) niter: 11660 completed:  77%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.475  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+534m 22s (- 151m 53s) niter: 11680 completed:  77%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.392  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+535m 17s (- 150m 58s) niter: 11700 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.419  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+536m 12s (- 150m 3s) niter: 11720 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.445  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+537m 7s (- 149m 9s) niter: 11740 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.431  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+538m 2s (- 148m 14s) niter: 11760 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.378  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+538m 59s (- 147m 19s) niter: 11780 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.541  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+539m 56s (- 146m 25s) niter: 11800 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.439  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+540m 54s (- 145m 31s) niter: 11820 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.419  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+541m 51s (- 144m 37s) niter: 11840 completed:  78%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.398  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+542m 49s (- 143m 42s) niter: 11860 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.477  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+543m 46s (- 142m 48s) niter: 11880 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.460  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+544m 43s (- 141m 54s) niter: 11900 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.370  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+545m 40s (- 140m 59s) niter: 11920 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.430  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+546m 38s (- 140m 5s) niter: 11940 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.435  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+547m 35s (- 139m 11s) niter: 11960 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.438  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+548m 32s (- 138m 16s) niter: 11980 completed:  79%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.415  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+549m 29s (- 137m 22s) niter: 12000 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.467  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+550m 25s (- 136m 27s) niter: 12020 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.367  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+551m 21s (- 135m 33s) niter: 12040 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.459  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+552m 17s (- 134m 38s) niter: 12060 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.403  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+553m 13s (- 133m 43s) niter: 12080 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.356  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+554m 9s (- 132m 48s) niter: 12100 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.536  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+555m 5s (- 131m 54s) niter: 12120 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+556m 1s (- 130m 59s) niter: 12140 completed:  80%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+556m 57s (- 130m 4s) niter: 12160 completed:  81%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.351  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+557m 53s (- 129m 9s) niter: 12180 completed:  81%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.456  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+558m 48s (- 128m 14s) niter: 12200 completed:  81%) g_loss: 0.017  g_recon_loss: 0.003  g_kld_loss: 0.598  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+559m 43s (- 127m 20s) niter: 12220 completed:  81%) g_loss: 0.018  g_recon_loss: 0.003  g_kld_loss: 0.756  g_recog_loss: 0.014  d_loss: 0.001  d_recog_loss: 0.001 
+560m 38s (- 126m 25s) niter: 12240 completed:  81%) g_loss: 0.012  g_recon_loss: 0.003  g_kld_loss: 0.558  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+561m 32s (- 125m 30s) niter: 12260 completed:  81%) g_loss: 0.011  g_recon_loss: 0.002  g_kld_loss: 0.444  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+562m 27s (- 124m 35s) niter: 12280 completed:  81%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.389  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+563m 22s (- 123m 40s) niter: 12300 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.394  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+564m 16s (- 122m 44s) niter: 12320 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.342  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+565m 11s (- 121m 49s) niter: 12340 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.429  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+566m 6s (- 120m 55s) niter: 12360 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.518  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+567m 1s (- 119m 59s) niter: 12380 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.412  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+567m 55s (- 119m 4s) niter: 12400 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.416  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+568m 50s (- 118m 9s) niter: 12420 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.421  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+569m 43s (- 117m 14s) niter: 12440 completed:  82%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.424  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+570m 36s (- 116m 19s) niter: 12460 completed:  83%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.403  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+571m 29s (- 115m 23s) niter: 12480 completed:  83%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.530  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+572m 22s (- 114m 28s) niter: 12500 completed:  83%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.346  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+573m 15s (- 113m 33s) niter: 12520 completed:  83%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.478  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+574m 8s (- 112m 37s) niter: 12540 completed:  83%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.389  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+575m 1s (- 111m 42s) niter: 12560 completed:  83%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.379  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+575m 54s (- 110m 47s) niter: 12580 completed:  83%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.474  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+576m 47s (- 109m 51s) niter: 12600 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.402  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+577m 40s (- 108m 56s) niter: 12620 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.443  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+578m 34s (- 108m 1s) niter: 12640 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.451  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+579m 28s (- 107m 6s) niter: 12660 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.468  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+580m 22s (- 106m 11s) niter: 12680 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.471  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+581m 16s (- 105m 16s) niter: 12700 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.533  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+582m 10s (- 104m 21s) niter: 12720 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.394  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+583m 5s (- 103m 26s) niter: 12740 completed:  84%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.476  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+584m 1s (- 102m 31s) niter: 12760 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.428  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+584m 56s (- 101m 36s) niter: 12780 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+585m 50s (- 100m 41s) niter: 12800 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.444  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+586m 45s (- 99m 46s) niter: 12820 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.412  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+587m 40s (- 98m 51s) niter: 12840 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.465  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+588m 34s (- 97m 56s) niter: 12860 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+589m 28s (- 97m 1s) niter: 12880 completed:  85%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.539  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+590m 24s (- 96m 6s) niter: 12900 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.527  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+591m 18s (- 95m 11s) niter: 12920 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.409  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+592m 13s (- 94m 16s) niter: 12940 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.440  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+593m 7s (- 93m 21s) niter: 12960 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.449  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+594m 2s (- 92m 26s) niter: 12980 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.493  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+594m 57s (- 91m 31s) niter: 13000 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.469  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+595m 52s (- 90m 37s) niter: 13020 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.359  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+596m 47s (- 89m 42s) niter: 13040 completed:  86%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.473  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+597m 42s (- 88m 47s) niter: 13060 completed:  87%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.458  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+598m 37s (- 87m 52s) niter: 13080 completed:  87%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.461  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+599m 32s (- 86m 57s) niter: 13100 completed:  87%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.415  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+600m 27s (- 86m 2s) niter: 13120 completed:  87%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.502  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+601m 22s (- 85m 7s) niter: 13140 completed:  87%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.544  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+602m 16s (- 84m 12s) niter: 13160 completed:  87%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.494  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+603m 12s (- 83m 17s) niter: 13180 completed:  87%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.723  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+604m 6s (- 82m 22s) niter: 13200 completed:  88%) g_loss: 0.013  g_recon_loss: 0.003  g_kld_loss: 0.688  g_recog_loss: 0.009  d_loss: 0.001  d_recog_loss: 0.001 
+605m 1s (- 81m 27s) niter: 13220 completed:  88%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.354  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+605m 56s (- 80m 32s) niter: 13240 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.375  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+606m 51s (- 79m 37s) niter: 13260 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.419  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+607m 45s (- 78m 42s) niter: 13280 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.376  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+608m 39s (- 77m 47s) niter: 13300 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.388  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+609m 34s (- 76m 52s) niter: 13320 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.393  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+610m 28s (- 75m 57s) niter: 13340 completed:  88%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.357  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+611m 23s (- 75m 3s) niter: 13360 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.374  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+612m 17s (- 74m 8s) niter: 13380 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.403  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+613m 11s (- 73m 12s) niter: 13400 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.472  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+614m 5s (- 72m 18s) niter: 13420 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.436  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+615m 0s (- 71m 23s) niter: 13440 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.401  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+615m 54s (- 70m 28s) niter: 13460 completed:  89%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.402  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+616m 48s (- 69m 33s) niter: 13480 completed:  89%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.448  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+617m 43s (- 68m 38s) niter: 13500 completed:  90%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.388  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+618m 37s (- 67m 43s) niter: 13520 completed:  90%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.425  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+619m 32s (- 66m 48s) niter: 13540 completed:  90%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.531  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+620m 27s (- 65m 53s) niter: 13560 completed:  90%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.448  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+621m 21s (- 64m 58s) niter: 13580 completed:  90%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.440  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+622m 17s (- 64m 3s) niter: 13600 completed:  90%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.405  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+623m 14s (- 63m 8s) niter: 13620 completed:  90%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.513  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+624m 11s (- 62m 14s) niter: 13640 completed:  90%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.445  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+625m 7s (- 61m 19s) niter: 13660 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.422  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+626m 4s (- 60m 24s) niter: 13680 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.417  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+627m 1s (- 59m 29s) niter: 13700 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.387  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+627m 58s (- 58m 35s) niter: 13720 completed:  91%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.549  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+628m 55s (- 57m 40s) niter: 13740 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.518  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+629m 53s (- 56m 45s) niter: 13760 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.388  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+630m 51s (- 55m 51s) niter: 13780 completed:  91%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.462  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+631m 48s (- 54m 56s) niter: 13800 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.439  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+632m 43s (- 54m 1s) niter: 13820 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.463  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+633m 39s (- 53m 6s) niter: 13840 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.322  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+634m 35s (- 52m 11s) niter: 13860 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.445  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+635m 31s (- 51m 16s) niter: 13880 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.427  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+636m 27s (- 50m 21s) niter: 13900 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.444  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+637m 23s (- 49m 27s) niter: 13920 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.453  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+638m 19s (- 48m 32s) niter: 13940 completed:  92%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.437  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+639m 17s (- 47m 37s) niter: 13960 completed:  93%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.504  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+640m 16s (- 46m 42s) niter: 13980 completed:  93%) g_loss: 0.014  g_recon_loss: 0.002  g_kld_loss: 0.612  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+641m 14s (- 45m 48s) niter: 14000 completed:  93%) g_loss: 0.011  g_recon_loss: 0.003  g_kld_loss: 0.615  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+642m 13s (- 44m 53s) niter: 14020 completed:  93%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.407  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+643m 11s (- 43m 58s) niter: 14040 completed:  93%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.431  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+644m 10s (- 43m 4s) niter: 14060 completed:  93%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.367  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+645m 8s (- 42m 9s) niter: 14080 completed:  93%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.413  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+646m 7s (- 41m 14s) niter: 14100 completed:  94%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.404  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+647m 6s (- 40m 19s) niter: 14120 completed:  94%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.397  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+648m 4s (- 39m 24s) niter: 14140 completed:  94%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.454  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+649m 0s (- 38m 30s) niter: 14160 completed:  94%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.454  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+649m 56s (- 37m 35s) niter: 14180 completed:  94%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.359  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+650m 53s (- 36m 40s) niter: 14200 completed:  94%) g_loss: 0.015  g_recon_loss: 0.003  g_kld_loss: 0.871  g_recog_loss: 0.011  d_loss: 0.001  d_recog_loss: 0.001 
+651m 48s (- 35m 45s) niter: 14220 completed:  94%) g_loss: 0.010  g_recon_loss: 0.002  g_kld_loss: 0.611  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+652m 45s (- 34m 50s) niter: 14240 completed:  94%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.384  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+653m 41s (- 33m 55s) niter: 14260 completed:  95%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.452  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+654m 37s (- 33m 0s) niter: 14280 completed:  95%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.401  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+655m 33s (- 32m 5s) niter: 14300 completed:  95%) g_loss: 0.013  g_recon_loss: 0.002  g_kld_loss: 0.569  g_recog_loss: 0.010  d_loss: 0.002  d_recog_loss: 0.002 
+656m 30s (- 31m 10s) niter: 14320 completed:  95%) g_loss: 0.011  g_recon_loss: 0.003  g_kld_loss: 0.742  g_recog_loss: 0.008  d_loss: 0.001  d_recog_loss: 0.001 
+657m 26s (- 30m 15s) niter: 14340 completed:  95%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.463  g_recog_loss: 0.007  d_loss: 0.001  d_recog_loss: 0.001 
+658m 22s (- 29m 20s) niter: 14360 completed:  95%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.382  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+659m 17s (- 28m 25s) niter: 14380 completed:  95%) g_loss: 0.009  g_recon_loss: 0.002  g_kld_loss: 0.410  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+660m 13s (- 27m 30s) niter: 14400 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.329  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+661m 10s (- 26m 35s) niter: 14420 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.363  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+662m 6s (- 25m 40s) niter: 14440 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.429  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+663m 0s (- 24m 45s) niter: 14460 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.405  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+663m 55s (- 23m 50s) niter: 14480 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.369  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+664m 49s (- 22m 55s) niter: 14500 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.412  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+665m 43s (- 22m 0s) niter: 14520 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.456  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+666m 38s (- 21m 5s) niter: 14540 completed:  96%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.395  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+667m 32s (- 20m 10s) niter: 14560 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.414  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+668m 27s (- 19m 15s) niter: 14580 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.400  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+669m 21s (- 18m 20s) niter: 14600 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.379  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+670m 15s (- 17m 25s) niter: 14620 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.399  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+671m 10s (- 16m 30s) niter: 14640 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.421  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+672m 4s (- 15m 35s) niter: 14660 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.445  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+672m 59s (- 14m 40s) niter: 14680 completed:  97%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.471  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+673m 54s (- 13m 45s) niter: 14700 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.448  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+674m 49s (- 12m 50s) niter: 14720 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.424  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+675m 44s (- 11m 55s) niter: 14740 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.402  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+676m 39s (- 11m 0s) niter: 14760 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.433  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+677m 34s (- 10m 5s) niter: 14780 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.415  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+678m 29s (- 9m 10s) niter: 14800 completed:  98%) g_loss: 0.007  g_recon_loss: 0.002  g_kld_loss: 0.351  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+679m 27s (- 8m 15s) niter: 14820 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.389  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+680m 25s (- 7m 20s) niter: 14840 completed:  98%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.450  g_recog_loss: 0.006  d_loss: 0.001  d_recog_loss: 0.001 
+681m 23s (- 6m 25s) niter: 14860 completed:  99%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.449  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+682m 21s (- 5m 30s) niter: 14880 completed:  99%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.471  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+683m 18s (- 4m 35s) niter: 14900 completed:  99%) g_loss: 0.007  g_recon_loss: 0.002  g_kld_loss: 0.380  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+684m 17s (- 3m 40s) niter: 14920 completed:  99%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.448  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+685m 14s (- 2m 45s) niter: 14940 completed:  99%) g_loss: 0.007  g_recon_loss: 0.002  g_kld_loss: 0.432  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+686m 12s (- 1m 50s) niter: 14960 completed:  99%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.460  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+687m 11s (- 0m 55s) niter: 14980 completed:  99%) g_loss: 0.008  g_recon_loss: 0.002  g_kld_loss: 0.441  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+688m 9s (- 0m 0s) niter: 15000 completed: 100%) g_loss: 0.007  g_recon_loss: 0.002  g_kld_loss: 0.432  g_recog_loss: 0.005  d_loss: 0.001  d_recog_loss: 0.001 
+Time: 2023-01-04 03:09:19.906518

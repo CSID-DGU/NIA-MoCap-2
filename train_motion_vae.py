@@ -7,6 +7,7 @@ from dataProcessing import dataset
 from utils.plot_script import plot_loss
 from options.train_vae_options import TrainOptions
 import os
+from datetime import datetime
 
 
 if __name__ == "__main__":
@@ -37,8 +38,8 @@ if __name__ == "__main__":
         kinematic_chain = paramUtil.humanact12_kinematic_chain
         data = dataset.MotionFolderDatasetHumanAct12(dataset_path, opt, lie_enforce=opt.lie_enforce)
 
-    elif opt.dataset_type == "dtaas1217":
-        dataset_path = "./dataset/dtaas1217"
+    elif opt.dataset_type == "dtaas_final":
+        dataset_path = "./dataset/dtaas_final"
         input_size = 72
         joints_num = 24
         raw_offsets = paramUtil.humanact12_raw_offsets
@@ -107,7 +108,7 @@ if __name__ == "__main__":
     print(decoder)
     print("Total parameters of decoder: {}".format(pc_decoder))
     # print(kinematic_chain)
-    print("2022.12.11 18:05")
+
 
 ##### modify
     motion_discriminator = None
@@ -130,6 +131,8 @@ if __name__ == "__main__":
         print("Total parameters of motion discriminator: {}".format(
             sum(param.numel() for param in motion_classifier.parameters())))
 
+    print(f'Time: {datetime.now()}')
+
     if opt.use_lie:
         # Use Lie representation
         trainer = TrainerLie(motion_loader, opt, device, raw_offsets, kinematic_chain)
@@ -142,3 +145,5 @@ if __name__ == "__main__":
 
     plot_loss(logs, os.path.join(opt.save_root, "loss_curve.png"), opt.plot_every)
     save_logfile(logs, opt.log_path)
+
+    print(f'Time: {datetime.now()}')

@@ -10,7 +10,7 @@ class MotionVAELieGeneratedDataset(Dataset):
         if opt.dataset_type == 'ntu_rgbd_vibe':
             raw_offsets = paramUtil.vibe_raw_offsets
             kinematic_chain = paramUtil.vibe_kinematic_chain
-        elif opt.dataset_type == 'shihao' or opt.dataset_type == 'humanact12' or opt.dataset_type == 'dtaas1217':
+        elif opt.dataset_type == 'shihao' or opt.dataset_type == 'humanact12' or opt.dataset_type == 'dtaas_final':
             raw_offsets = paramUtil.humanact12_raw_offsets
             kinematic_chain = paramUtil.humanact12_kinematic_chain
         elif opt.dataset_type == 'mocap':

@@ -70,8 +70,8 @@ dataset_opt = {
         'enumerator': paramUtil.shihao_coarse_action_enumerator,
     },
     
-    'dtaas1217': {
-        'dataset_path': "./dataset/dtaas1217",
+    'dtaas_final': {
+        'dataset_path': "./dataset/dtaas_final",
         'input_size_raw': 72,
         'joints_num': 24,
         'label_dec': [i for i in range(1, 143)],

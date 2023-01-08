@@ -1,0 +1,190 @@
+irteam@9f8b370d388a:~/Desktop/bomi/final/a2m_mocap$ python evaluate_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type dtaas_final --use_lie --time_counter --batch_size 128 --motion_length 60 --coarse_grained --gpu_id 0 --replic_times 1 --name_ext _R0 > gif_result.txt 2> gif_error.txt
+------------ Options -------------
+action_list: 0,1
+batch_size: 128
+checkpoints_dir: ./checkpoints/vae
+clip_set: ./dataset/pose_clip_full.csv
+coarse_grained: True
+d_hidden_layers: 2
+dataset_type: dtaas_final
+decoder_hidden_layers: 2
+dim_z: 30
+do_action_shift: False
+do_all_parent: False
+do_interp: False
+do_quantile: False
+do_random: False
+do_relative: False
+epoch_size: None
+gpu_id: 0
+hidden_size: 128
+interp_bins: 10
+interp_step: 0
+interp_type: linear
+isTrain: False
+lie_enforce: False
+motion_length: 60
+name: vanilla_vae_lie_mse_kld_final
+name_ext: _R0
+no_trajectory: False
+num_samples: 100
+posterior_hidden_layers: 1
+pp_dims: -1
+prior_hidden_layers: 1
+replic_times: 1
+result_path: ./eval_results/vae/
+save_latent: False
+shift_steps: 50
+start_step: 30
+time_counter: True
+use_hdl: False
+use_lie: True
+use_vel_H: False
+use_vel_S: False
+veloc_hidden_layers: 1
+which_epoch: latest
+-------------- End ----------------
+Total number of frames 983956, videos 14116, action types 142
+(142, 60, 72)
+2023-01-04 03:03:33.511475
+0m 3s (- 8m 48s) completed:   0%
+0m 6s (- 8m 0s) completed:   1%
+0m 10s (- 7m 47s) completed:   2%
+0m 13s (- 7m 35s) completed:   2%
+0m 16s (- 7m 25s) completed:   3%
+0m 19s (- 7m 20s) completed:   4%
+0m 22s (- 7m 14s) completed:   4%
+0m 25s (- 7m 8s) completed:   5%
+0m 28s (- 7m 3s) completed:   6%
+0m 31s (- 7m 0s) completed:   7%
+0m 34s (- 6m 55s) completed:   7%
+0m 38s (- 6m 51s) completed:   8%
+0m 41s (- 6m 48s) completed:   9%
+0m 44s (- 6m 44s) completed:   9%
+0m 47s (- 6m 40s) completed:  10%
+0m 50s (- 6m 37s) completed:  11%
+0m 53s (- 6m 33s) completed:  11%
+0m 56s (- 6m 29s) completed:  12%
+0m 59s (- 6m 26s) completed:  13%
+1m 2s (- 6m 23s) completed:  14%
+1m 5s (- 6m 19s) completed:  14%
+1m 9s (- 6m 16s) completed:  15%
+1m 12s (- 6m 12s) completed:  16%
+1m 15s (- 6m 9s) completed:  16%
+1m 18s (- 6m 6s) completed:  17%
+1m 21s (- 6m 3s) completed:  18%
+1m 24s (- 5m 59s) completed:  19%
+1m 27s (- 5m 56s) completed:  19%
+1m 30s (- 5m 53s) completed:  20%
+1m 33s (- 5m 50s) completed:  21%
+1m 36s (- 5m 46s) completed:  21%
+1m 39s (- 5m 43s) completed:  22%
+1m 43s (- 5m 40s) completed:  23%
+1m 46s (- 5m 37s) completed:  23%
+1m 49s (- 5m 34s) completed:  24%
+1m 52s (- 5m 30s) completed:  25%
+1m 55s (- 5m 27s) completed:  26%
+1m 58s (- 5m 24s) completed:  26%
+2m 1s (- 5m 21s) completed:  27%
+2m 4s (- 5m 18s) completed:  28%
+2m 8s (- 5m 15s) completed:  28%
+2m 11s (- 5m 12s) completed:  29%
+2m 14s (- 5m 9s) completed:  30%
+2m 17s (- 5m 6s) completed:  30%
+2m 20s (- 5m 3s) completed:  31%
+2m 23s (- 5m 0s) completed:  32%
+2m 27s (- 4m 57s) completed:  33%
+2m 30s (- 4m 54s) completed:  33%
+2m 33s (- 4m 51s) completed:  34%
+2m 36s (- 4m 47s) completed:  35%
+2m 39s (- 4m 44s) completed:  35%
+2m 42s (- 4m 41s) completed:  36%
+2m 45s (- 4m 38s) completed:  37%
+2m 49s (- 4m 35s) completed:  38%
+2m 52s (- 4m 32s) completed:  38%
+2m 55s (- 4m 29s) completed:  39%
+2m 58s (- 4m 26s) completed:  40%
+3m 1s (- 4m 23s) completed:  40%
+3m 4s (- 4m 20s) completed:  41%
+3m 8s (- 4m 17s) completed:  42%
+3m 11s (- 4m 13s) completed:  42%
+3m 14s (- 4m 10s) completed:  43%
+3m 17s (- 4m 7s) completed:  44%
+3m 20s (- 4m 4s) completed:  45%
+3m 23s (- 4m 1s) completed:  45%
+3m 26s (- 3m 58s) completed:  46%
+3m 30s (- 3m 55s) completed:  47%
+3m 33s (- 3m 52s) completed:  47%
+3m 36s (- 3m 48s) completed:  48%
+3m 39s (- 3m 45s) completed:  49%
+3m 42s (- 3m 42s) completed:  50%
+3m 45s (- 3m 39s) completed:  50%
+3m 49s (- 3m 36s) completed:  51%
+3m 52s (- 3m 33s) completed:  52%
+3m 55s (- 3m 30s) completed:  52%
+3m 58s (- 3m 27s) completed:  53%
+4m 1s (- 3m 23s) completed:  54%
+4m 4s (- 3m 20s) completed:  54%
+4m 7s (- 3m 17s) completed:  55%
+4m 11s (- 3m 14s) completed:  56%
+4m 14s (- 3m 11s) completed:  57%
+4m 17s (- 3m 8s) completed:  57%
+4m 20s (- 3m 5s) completed:  58%
+4m 23s (- 3m 2s) completed:  59%
+4m 26s (- 2m 58s) completed:  59%
+4m 29s (- 2m 55s) completed:  60%
+4m 33s (- 2m 52s) completed:  61%
+4m 36s (- 2m 49s) completed:  61%
+4m 39s (- 2m 46s) completed:  62%
+4m 42s (- 2m 43s) completed:  63%
+4m 45s (- 2m 40s) completed:  64%
+4m 48s (- 2m 36s) completed:  64%
+4m 51s (- 2m 33s) completed:  65%
+4m 55s (- 2m 30s) completed:  66%
+4m 58s (- 2m 27s) completed:  66%
+5m 1s (- 2m 24s) completed:  67%
+5m 4s (- 2m 21s) completed:  68%
+5m 7s (- 2m 18s) completed:  69%
+5m 10s (- 2m 14s) completed:  69%
+5m 13s (- 2m 11s) completed:  70%
+5m 17s (- 2m 8s) completed:  71%
+5m 20s (- 2m 5s) completed:  71%
+5m 23s (- 2m 2s) completed:  72%
+5m 26s (- 1m 59s) completed:  73%
+5m 29s (- 1m 56s) completed:  73%
+5m 32s (- 1m 53s) completed:  74%
+5m 35s (- 1m 49s) completed:  75%
+5m 39s (- 1m 46s) completed:  76%
+5m 42s (- 1m 43s) completed:  76%
+5m 45s (- 1m 40s) completed:  77%
+5m 48s (- 1m 37s) completed:  78%
+5m 51s (- 1m 34s) completed:  78%
+5m 54s (- 1m 31s) completed:  79%
+5m 57s (- 1m 27s) completed:  80%
+6m 1s (- 1m 24s) completed:  80%
+6m 4s (- 1m 21s) completed:  81%
+6m 7s (- 1m 18s) completed:  82%
+6m 10s (- 1m 15s) completed:  83%
+6m 13s (- 1m 12s) completed:  83%
+6m 16s (- 1m 9s) completed:  84%
+6m 19s (- 1m 5s) completed:  85%
+6m 23s (- 1m 2s) completed:  85%
+6m 26s (- 0m 59s) completed:  86%
+6m 29s (- 0m 56s) completed:  87%
+6m 32s (- 0m 53s) completed:  88%
+6m 35s (- 0m 50s) completed:  88%
+6m 38s (- 0m 47s) completed:  89%
+6m 41s (- 0m 43s) completed:  90%
+6m 45s (- 0m 40s) completed:  90%
+6m 48s (- 0m 37s) completed:  91%
+6m 51s (- 0m 34s) completed:  92%
+6m 54s (- 0m 31s) completed:  92%
+6m 57s (- 0m 28s) completed:  93%
+7m 1s (- 0m 25s) completed:  94%
+7m 4s (- 0m 22s) completed:  95%
+7m 7s (- 0m 18s) completed:  95%
+7m 10s (- 0m 15s) completed:  96%
+7m 13s (- 0m 12s) completed:  97%
+7m 17s (- 0m 9s) completed:  97%
+7m 20s (- 0m 6s) completed:  98%
+7m 23s (- 0m 3s) completed:  99%
