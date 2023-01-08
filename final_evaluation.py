@@ -300,5 +300,5 @@ if __name__ == '__main__':
     animation_4_user_study(save_dir, motion_loaders)
     
     '''
-    log_file = 'final_evaluation_dtaas_final_1_veloc_label3_bk.log'
+    log_file = 'final_evaluation_dtaas_final_veloc_label3_bk.log'
     evaluation(log_file)
