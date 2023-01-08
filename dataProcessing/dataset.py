@@ -411,7 +411,7 @@ class MotionFolderDatasetDtaas(data.Dataset):
         print("Total number of frames {}, videos {}, action types {}".format(self.cumsum[-1], len(data_list), len(self.labels)))
         self.label_enc = dict(zip(self.labels, np.arange(len(self.labels))))
         self.label_enc_rev = dict(zip(np.arange(len(self.labels)), self.labels))
-        with codecs.open(os.path.join(opt.save_root, "label_enc_rev_humanact12.txt"), 'w', 'utf-8') as f:
+        with codecs.open(os.path.join(opt.save_root, "label_enc_rev_dtaas.txt"), 'w', 'utf-8') as f:
             for item in self.label_enc_rev.items():
                 f.write(str(item) + "\n")
 
