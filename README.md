@@ -1,13 +1,14 @@
 # action2motion
 
 ```코드를 실행하기 위한 step```
+
 python 환경 설정 -> AI모델 환경 설치가이드, 구축환경 정보 참고
 dataset 다운로드 및 전처리
 training
 test and animation
 
-
 ```dataset 다운로드 및 전처리```
+
 전처리 전 데이터 형태: bvh, JSON
 전처리 후 데이터 형태: npy (motion_length, joints_num, 3)
 dataset 폴더를 만들어서 안에 데이터 저장
@@ -15,6 +16,7 @@ mkdir ./dataset/
 
 
 ```dataset 설명```
+
 총 142개의 카테고리로 구성(utils/paramUtil.py에서 카테고리 확인 가능)
 각 카테고리 별로 약 100개의 데이터셋 존재 ->14116개의 npy파일 존재
 Spine: [0, 3, 6, 9, 12, 15]
@@ -23,6 +25,7 @@ Arms: [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]
 
 
 ```Training```
+
 train_motion_vae.py를 이용해서 model을 train
 train에 필요한 arguments는 options의 base_vae_option.py, train_vae_option.py에 존재
 모델 파일과 중간 학습 정보는 checkpoints에 저장됨
@@ -35,6 +38,7 @@ python train_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type d
 
 
 ```Test and Animation```
+
 animate하면 eval_results 폴더가 생성되고 그 안에서 결과를 확인할 수 있음
 evaluate_motion_vae.py 코드 이용
 replic_times로 카테고리 별 생성되는 모션의 개수를 지정할 수 있음
