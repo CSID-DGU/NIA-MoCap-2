@@ -1,5 +1,12 @@
 # action2motion
 
+### 소개
+
+해당 repository는 https://github.com/EricGuo5513/action-to-motion 을 clone하여 만들었음
+
+데이터 전처리를 위해 bvh-converter 폴더와, csv_to_npy_convert.py, json_to_npy_convert.py가 포함됨.
+
+
 ### 코드를 실행하기 위한 step
 
 1. python 환경 설정 -> AI모델 환경 설치가이드, 구축환경 정보 참고
