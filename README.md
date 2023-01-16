@@ -3,8 +3,11 @@
 ### 코드를 실행하기 위한 step
 
 python 환경 설정 -> AI모델 환경 설치가이드, 구축환경 정보 참고
+
 dataset 다운로드 및 전처리
+
 training
+
 test and animation
 
 
