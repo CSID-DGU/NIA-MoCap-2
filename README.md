@@ -42,9 +42,7 @@ train에 필요한 arguments는 options의 base_vae_option.py, train_vae_option.
 
 ```python train_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type dtaas_final --batch_size 2048 --do_recognition --motion_length 60 --coarse_grained --lambda_kld 0.001 --eval_every 1000 --plot_every 50 --print_every 20 --save_every 1000 --save_latest 50 --time_counter --use_lie --gpu_id 0 --iters 15000 > train_result.txt 2> train_error.txt```
 
-( > train_result.txt 2> train_error.txt 는 필수적인 코드는 아님)
-
-결과로 출력되는 result와 error를 분리해서 저장하여 보기 쉽게 하기 위한 코드
+( ```> train_result.txt 2> train_error.txt``` 는 필수적인 코드는 아님, 결과로 출력되는 result와 error를 분리해서 저장하여 보기 쉽게 하기 위한 코드)
 
 위의 코드로 train한 파일: checkpoints/vae/dtaas_final/vanilla_vae_lie_mse_kld_final
 
