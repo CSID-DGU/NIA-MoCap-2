@@ -1,21 +1,34 @@
-# action2motion
+# 대화 발표 동작 모션캡쳐 데이터 검증
 
 ### 소개
 
-해당 repository는 https://github.com/EricGuo5513/action-to-motion 을 clone하여 만들었음
+해당 repository는 
 
-데이터 전처리를 위해 bvh-converter 폴더와, csv_to_npy_convert.py, json_to_npy_convert.py가 포함됨.
+model: https://github.com/EricGuo5513/action-to-motion
+data preprocessing: https://github.com/tekulvw/bvh-converter
+
+를 기반으로 함.
+
+(bvh-converter 폴더와, csv_to_npy_convert.py 가 포함됨.)
 
 
-### 코드를 실행하기 위한 step
+### 검증 과정 step
 
 1. python 환경 설정 -> AI모델 환경 설치가이드, 구축환경 정보 참고
 
 2. dataset 다운로드 및 전처리
 
-3. training
+3. train
 
 4. test and animation
+
+
+### python 환경 설정
+
+1. 소스코드 clone
+```git clone https://github.com/CSID-DGU/NIA-MoCap-2
+cd NIA-MoCap-2```
+
 
 
 ### dataset 다운로드 및 전처리
