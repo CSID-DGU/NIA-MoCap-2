@@ -92,7 +92,7 @@ python train_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type d
 
 ### (2) train 결과 확인
 
-모델 파일과 중간 학습 정보는 checkpoints에 저장됨<br/>
+모델 파일과 학습된 정보는 checkpoints에 저장됨<br/>
 위의 코드로 train한 파일: checkpoints/vae/dtaas_final/vanilla_vae_lie_mse_kld_final
 
 <br/><br/>
@@ -112,7 +112,7 @@ python final_evaluation.py > fid_result.txt 2> fid_error.txt
 <br/>
 
 ### (2) FID 결과 확인
-final_evaluation.py의 303줄에 써놓은 파일(final_evaluation_dtaas_final_veloc_label3_bk.log)이 생성되므로 해당 파일에서 확인 가능 <br/>
+final_evaluation.py을 실행하면 final_evaluation_dtaas_final_veloc_label3_bk.log 파일이 생성되므로 해당 파일에서 확인 가능 <br/>
 ```> fid_result.txt 2> fid_error.txt``` 를 포함한 (1)의 코드로 실행했을 경우, <br/>
 현재 폴더의 fid_result.txt에서도 확인 가능 <br/>
 
