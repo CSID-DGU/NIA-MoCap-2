@@ -65,13 +65,16 @@ Arms: [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]
 
 ### (2) dataset 전처리 및 폴더 생성
 
-전처리 전 데이터 형태: bvh, JSON <br/>
+전처리 전 원천 데이터 형태: bvh (모션 캡쳐 데이터), JSON (영상 정보, 동작 프레임 구간 정보 등)<br/>
 전처리 후 데이터 형태: npy (motion_length, joints_num, 3)
-전처리 후의 데이터셋을 제공함
 
-dataset 폴더를 만들어서 안에 데이터 저장
+전처리 과정
+1. 모션 캡쳐 데이터가 local frame으로 저장된 bvh file을 global frame의 csv file로 변환하기 위해 [bvh-converter](https://github.com/tekulvw/bvh-converter) 사용
+2. 변환된 csv file과 json file의 정보를 조합하여 모델에 사용할 npy file로 전처리 (csv_to_npy_convert.py 참고)
+
+csv_to_npy_convert.py 의 70 line에서 data를 저장할 폴더를 생성
 ```
-mkdir ./dataset/
+ex) mkdir ./data/
 ```
 
 <br/><br/>
