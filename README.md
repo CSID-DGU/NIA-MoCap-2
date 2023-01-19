@@ -84,6 +84,8 @@ ex) mkdir ./data/
 train_motion_vae.py를 이용해서 model을 train <br/>
 train에 필요한 arguments와 설명은 options의 base_vae_option.py, train_vae_option.py에 존재
 
+dataset 이라는 이름의 폴더를 만들고, 앞서 전처리한 npy형태의 파일들을 해당 dataset폴더로 이동시킴
+
 ```
 python train_motion_vae.py --name vanilla_vae_lie_mse_kld_final --dataset_type dtaas_final --batch_size 2048 --do_recognition --motion_length 60 --coarse_grained --lambda_kld 0.001 --eval_every 1000 --plot_every 50 --print_every 20 --save_every 1000 --save_latest 50 --time_counter --use_lie --gpu_id 0 --iters 15000 > train_result.txt 2> train_error.txt
 ```
