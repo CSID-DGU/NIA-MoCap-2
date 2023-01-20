@@ -36,7 +36,6 @@ cd NIA-MoCap-2
 
 ### (2) 모듈 환경 셋팅
 ```
-pip install -r requirement.txt
 pip install torch
 pip install pillow
 pip install scipy
