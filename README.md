@@ -40,7 +40,7 @@ There are 142 action classes in the DGU-HAU dataset.<br/>
 Each action class has about 100 data samples, so there are 14,116 data samples in total.
 
 
-The joint number of 3D human skeleton data (motion capture data). The detailed position of the joint is described in the paper.<br/>
+The joint number of 3D human skeleton data (motion capture data). The detailed position of the joint is described in a paper. (the paper link is TBU) <br/>
 Spine: [0, 3, 6, 9, 12, 15]<br/>
 Legs: [0, 1, 4, 7, 10], [0, 2, 5, 8, 11]<br/>
 Arms: [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]
