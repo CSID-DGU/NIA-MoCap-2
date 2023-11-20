@@ -1,32 +1,17 @@
-# 대화 발표 동작 모션캡쳐 데이터 검증
+# DGU-HAU: A Dataset for 3D Human Action Analysis on Utterances
 
-## 소개
-
-해당 repository는 
+This repository is based on Action2Modion and bvh-converter. 
 
 model: https://github.com/EricGuo5513/action-to-motion<br/>
 data preprocessing: https://github.com/tekulvw/bvh-converter
 
-를 기반으로 함.  (bvh-converter 폴더와, csv_to_npy_convert.py 가 포함됨.)
-
-<br/><br/>
-
-## 검증 과정 step
-
-1. python 환경 설정 -> AI모델 환경 설치가이드, 구축환경 정보 참고
-
-2. dataset 다운로드 및 전처리
-
-3. train
-
-4. test and animation
-
 <br/><br/>
 
 
-## 1. python 환경 설정
 
-### (1) 소스코드 clone
+## 1. Environment Setting
+
+### (1) Repository clone
 
 ```
 git clone https://github.com/CSID-DGU/NIA-MoCap-2.git
@@ -34,7 +19,7 @@ cd NIA-MoCap-2
 ```
 <br/>
 
-### (2) 모듈 환경 셋팅
+### (2) Requirements
 ```
 pip install torch
 pip install pillow
@@ -47,14 +32,15 @@ pip install joblib
 
 <br/><br/>
 
-## 2. dataset 다운로드 및 전처리
+## 2. Dataset download & Pre-processing
 
-### (1) dataset 설명
+### (1) Dataset configuration
 
-총 142개의 카테고리로 구성(utils/paramUtil.py에서 카테고리 확인 가능)<br/>
-각 카테고리 별로 약 100개의 데이터셋 존재 -> 14116개의 npy파일 존재
+There are 142 action classes in the DGU-HAU dataset.<br/>
+Each action class has about 100 data samples, so there are 14,116 data samples in total.
 
-다음은 사용하는 골격의 번호를 나타냄<br/>
+
+The joint number of 3D human skeleton data (motion capture data). The detailed position of the joint is described in the paper.<br/>
 Spine: [0, 3, 6, 9, 12, 15]<br/>
 Legs: [0, 1, 4, 7, 10], [0, 2, 5, 8, 11]<br/>
 Arms: [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]
