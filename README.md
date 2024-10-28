@@ -52,4 +52,18 @@ Arms: [9, 13, 16, 18, 20, 22], [9, 14, 17, 19, 21, 23]
 
 <br/>
 
+## 3. Dataset citation
+```
+@article{park2023dgu,
+  title={DGU-HAU: A Dataset for 3D Human Action Analysis on Utterances},
+  author={Park, Jiho and Park, Kwangryeol and Kim, Dongho},
+  journal={Electronics},
+  volume={12},
+  number={23},
+  pages={4793},
+  year={2023},
+  publisher={MDPI}
+}
+```
+
 
