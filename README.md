@@ -35,6 +35,8 @@ pip install joblib
 ## 2. Dataset download & Pre-processing
 [Dataset download](https://farmnas.synology.me:6953/sharing/Xe5BHlwnl)
 
+(To access the data, please use a VPN to change your location to South Korea and then access the link above.)
+
 ### (1) Dataset configuration
 
 There are 142 action classes in the DGU-HAU dataset.<br/>
