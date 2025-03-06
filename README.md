@@ -32,7 +32,7 @@ pip install joblib
 
 <br/><br/>
 
-## 2. ~~Dataset download (Data Lost)~~ & Pre-processing
+## 2. Dataset download (Data Lost) & Pre-processing
 ~~[Dataset download]()~~
 
 ~~(To access the data, please use a VPN to change your location to South Korea and then access the link above.)~~
